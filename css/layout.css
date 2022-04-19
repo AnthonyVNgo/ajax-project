@@ -1,0 +1,40 @@
+.container {
+  max-width: 75%;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-thirds {
+  flex-basis: calc(100% / 3);
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-absolute-bottom-0 {
+  bottom: 0;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.align-content-center {
+  align-content: center;
+}
