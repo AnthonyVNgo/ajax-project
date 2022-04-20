@@ -1,13 +1,43 @@
-.mobile-nav-container {
-  background-color: #e3f2fd;
-  height: 100px;
-
-  /* height: 6rem; */
+#clouds {
+  position: absolute;
+  top: 5rem;
 }
 
-.button {
-  background-color: #93e4a5;
-  border-radius: 10px;
-  padding: 0.5rem 1.5rem;
-  color: #292929;
+#sun {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.hills-desktop {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 -5px;
+  padding: 0;
+}
+
+.hills-desktop > svg {
+  width: 100vw;
+}
+
+@media only screen and (min-width: 425px) {
+  body {
+    overflow: hidden;
+  }
+
+  .mobile-nav-container {
+    display: none;
+  }
+
+  .height-100vh-modded {
+    height: 100vh;
+  }
+
+  #sun {
+    right: 10%;
+  }
+
+  div.height-100vh-modded > div {
+    flex-basis: 300px;
+  }
 }
