@@ -14,14 +14,15 @@
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <script src="https://kit.fontawesome.com/011024de61.js" crossorigin="anonymous"></script>
 </head>
-<header>
+  <header>
   <lottie-player id="sun"
     src="https://assets5.lottiefiles.com/packages/lf20_5i5k8eh3.json" background="transparent" speed="1"
     style="width: 300px; height: 300px;" loop autoplay></lottie-player>
 
-  <lottie-player id="clouds"
-    src="https://assets6.lottiefiles.com/packages/lf20_yc2d0lo5.json"
-    background="transparent" speed="1" style="width: 100%; height: 300px;" loop autoplay></lottie-player>
+  <div id="clouds-container">
+    <lottie-player id="clouds" src="https://assets6.lottiefiles.com/packages/lf20_yc2d0lo5.json" background="transparent"
+        speed="1" loop autoplay></lottie-player>
+  </div>
 
   </header>
   <body>
@@ -35,7 +36,7 @@
           <h1>Happy Here</h1>
           <h2>Search urban areas and see quality of life scores</h2>
           <form class="row justify-content-center">
-            <input id="search-bar" type="text" placeholder="San Frandisco, CA" required>
+            <input id="search-bar" type="search" placeholder="Search city..." required>
           </form>
         </div>
 
@@ -66,6 +67,7 @@
         <p>Search</p>
       </div>
     </div>
+
 
   </main>
   <script src="js/data.js"></script>
