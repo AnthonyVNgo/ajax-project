@@ -1,15 +1,8 @@
 var searchBarElement = document.querySelector('#search-bar');
 var searchFormElement = document.querySelector('form');
-
-function submit(event) {
-  event.preventDefault();
-}
-
-searchFormElement.addEventListener('submit', submit);
-
-// Mobile Nav
-
 var searchButtonElement = document.querySelector('#search-btn');
+
+// Mobile Nav Search Button
 
 function searchButtonClick(event) {
   searchBarElement.focus();
@@ -17,21 +10,34 @@ function searchButtonClick(event) {
 
 searchButtonElement.addEventListener('click', searchButtonClick);
 
-// AJAX
+// Search Bar Submit Event
 
-// function getCities() {
-//   var xhr = XMLHttpRequest();
+function submit(event) {
+  event.preventDefault();
+  // console.log(event.target);
+  // console.log(event.target.tagName);
+  var inputValue = searchFormElement.querySelector('input').value;
+  // console.log(inputValue);
 
-//   xhr.open('GET', 'https://api.teleport.org/api/cities/?search=irvine');
-//   xhr.responseType = 'json';
-//   xhr.addEventListener('load', function () {
-//     console.log(xhr.status);
-//     console.log(xhr.response);
-//   });
-//   xmr.send();
-// }
+  if (inputValue.search(' ') !== -1) {
+    var newInputValue = inputValue.replace(' ', '-');
+    inputValue = newInputValue;
+    // console.log(inputValue);
+  }
+  getCities(inputValue);
+}
 
-// console.log(xmr.status)
-// console.log(xmr.response)
+searchFormElement.addEventListener('submit', submit);
 
-// }
+function getCities(city) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.teleport.org/api/urban_areas/slug%3A' + city + '/scores/');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    // console.log(xhr.response);
+    // console.log(xhr.status);
+    // var categories = xhr.response.categories;
+    // console.log({ categories });
+  });
+  xhr.send();
+}
