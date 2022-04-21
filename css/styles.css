@@ -1,0 +1,152 @@
+#clouds-container {
+  width: 100vw;
+}
+
+#clouds {
+  position: absolute;
+  top: 5rem;
+  width: 100%;
+  height: auto;
+}
+
+#sun {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Search bar stuff  */
+::placeholder {
+  color: #6c757d;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+}
+
+.search-bar-icon-container {
+  position: absolute;
+  left: 0%;
+  top: 0;
+}
+
+.search-bar-icon-container > button {
+  padding: 10px;
+  border: none;
+  margin-top: 2px;
+  background-color: transparent;
+}
+
+button > i.fa-magnifying-glass {
+  font-size: 1rem;
+}
+
+input {
+  flex-basis: 100%;
+  padding: 10px 5px 10px 0;
+  border-radius: 5px;
+  border: solid 2px #ced4da;
+  padding-left: 3rem;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #93e4a5;
+}
+
+/* Background stuff */
+
+.hills-desktop {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 -5px;
+  padding: 0;
+}
+
+.hills-desktop > svg {
+  width: 100vw;
+}
+
+/* Main section text stuff */
+
+div.column-full.height-fit-content > h1 {
+  text-align: center;
+  font-size: 2.8rem;
+}
+
+div.column-full.height-fit-content > h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Mobile UI stuff */
+
+.mobile-nav-container {
+  background-color: #e3f2fd;
+  height: 100px;
+}
+
+.button {
+  background-color: #93e4a5;
+  border-radius: 10px;
+  padding: 0.5rem 1.5rem;
+  color: #292929;
+}
+
+.fa-solid,
+.fa-magnifying-glass {
+  font-size: 2rem;
+  display: inline;
+  text-align: center;
+}
+
+.nav-item {
+  flex-basis: 10%;
+}
+
+.nav-item > p {
+  margin: 0;
+  text-align: center;
+}
+
+/* Responsive Stuff */
+
+@media only screen and (min-width: 425px) {
+  body {
+    overflow: hidden;
+  }
+
+  .mobile-nav-container {
+    display: none;
+  }
+
+  .height-100vh-modded {
+    height: 100vh;
+  }
+
+  #sun {
+    right: 10%;
+  }
+
+  #clouds {
+    top: 5%;
+  }
+
+  div.height-100vh-modded > div {
+    flex-basis: 300px;
+  }
+}
+
+/* responsive clouds */
+
+@media only screen and (min-width: 880px) {
+  #clouds {
+    top: 0;
+    margin-top: -3.5%;
+  }
+}
+
+@media only screen and (min-width: 1125px) {
+  #clouds {
+    top: 0;
+    margin-top: -12.5%;
+  }
+}
