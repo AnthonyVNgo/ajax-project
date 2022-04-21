@@ -14,15 +14,11 @@ searchButtonElement.addEventListener('click', searchButtonClick);
 
 function submit(event) {
   event.preventDefault();
-  // console.log(event.target);
-  // console.log(event.target.tagName);
   var inputValue = searchFormElement.querySelector('input').value;
-  // console.log(inputValue);
 
   if (inputValue.search(' ') !== -1) {
     var newInputValue = inputValue.replace(' ', '-');
     inputValue = newInputValue;
-    // console.log(inputValue);
   }
   getCities(inputValue);
 }
@@ -34,10 +30,6 @@ function getCities(city) {
   xhr.open('GET', 'https://api.teleport.org/api/urban_areas/slug%3A' + city + '/scores/');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
-    // console.log(xhr.status);
-    // var categories = xhr.response.categories;
-    // console.log({ categories });
   });
   xhr.send();
 }
