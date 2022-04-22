@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 .container {
   max-width: 80%;
   margin: 0 auto;
@@ -45,8 +49,4 @@
 
 .height-100vh-modded {
   height: calc(100vh - 100px);
-}
-
-.hidden {
-  display: none;
 }

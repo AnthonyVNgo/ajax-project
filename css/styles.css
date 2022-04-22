@@ -77,6 +77,58 @@ div.column-full.height-fit-content > h2 {
   margin-bottom: 3rem;
 }
 
+/* City stats view stuff */
+
+li > div > p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0.4rem 0;
+}
+
+li > div {
+  padding: 0 1rem;
+}
+
+.nav-item > p {
+  margin: 0;
+  text-align: center;
+}
+
+div.column-full.height-fit-content > p {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: -1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+div.justify-content-center > button {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.75rem;
+  background-color: #93e4a5;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0%;
+  padding: 0;
+}
+
+/* li > div > p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0.4rem 0;
+}
+
+li > div {
+  padding: 0 1rem;
+} */
+
 /* Mobile UI stuff */
 
 .mobile-nav-container {
@@ -100,11 +152,6 @@ div.column-full.height-fit-content > h2 {
 
 .nav-item {
   flex-basis: 10%;
-}
-
-.nav-item > p {
-  margin: 0;
-  text-align: center;
 }
 
 /* Responsive Stuff */
