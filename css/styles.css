@@ -7,12 +7,18 @@
   top: 5rem;
   width: 100%;
   height: auto;
+  z-index: -1;
 }
 
 #sun {
   position: absolute;
   right: 0;
   top: 0;
+  z-index: -2;
+}
+
+#city-stats-view-city-name {
+  text-transform: capitalize;
 }
 
 /* Search bar stuff  */
@@ -94,12 +100,24 @@ li > div {
   text-align: center;
 }
 
-div.column-full.height-fit-content > p {
+.overall-score {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
   margin-top: -1.5rem;
   margin-bottom: 0.25rem;
+  position: relative;
+}
+
+.overall-score::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  margin-left: -5px;
+  width: 75px;
+  height: 14px;
+  background: #e9ffa9;
+  z-index: -1;
 }
 
 div.justify-content-center > button {
@@ -156,13 +174,9 @@ li > div {
 
 /* Responsive Stuff */
 
-@media only screen and (min-width: 425px) {
+@media only screen and (min-width: 600px) {
   body {
     overflow: hidden;
-  }
-
-  .mobile-nav-container {
-    display: none;
   }
 
   .height-100vh-modded {
