@@ -65,6 +65,7 @@ input:focus {
   position: absolute;
   margin: 0 0 -5px;
   padding: 0;
+  z-index: -5;
 }
 
 .hills-desktop > svg {

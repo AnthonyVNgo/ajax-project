@@ -9,7 +9,7 @@ var overAllScoreElement = document.querySelector('.overall-score');
 
 // data stuff
 
-var cityData = [];
+// var cityData = [];
 
 // View Swapping Functions
 
@@ -30,16 +30,18 @@ function hideCityStatsView() {
 
 // City Stats View Stuff
 
-function createListItem(city, score) {
+function createListItem(score) {
   var liElement = document.createElement('li');
   var liContainer = document.createElement('div');
   var liStatsElement = document.createElement('p');
   var liScoreElement = document.createElement('p');
+  // var overallScoreElement = Math.floor(score.score_out_of_10);
+  // console.log(overallScoreElement);
 
   liContainer.className = 'row justify-content-space-between';
 
-  liStatsElement.textContent = 'rosemead';
-  liScoreElement.textContent = score + '/10';
+  liStatsElement.textContent = score.name;
+  liScoreElement.textContent = Math.floor(score.score_out_of_10) + '/10';
 
   liElement.appendChild(liContainer);
   liContainer.appendChild(liStatsElement);
@@ -47,9 +49,10 @@ function createListItem(city, score) {
   cityStatsCityStatsList.appendChild(liElement);
 }
 
-function createList() {
-  for (var i = 0; i < 6; i++) {
-    createListItem();
+function createList(scores) {
+  // var scoreSum;
+  for (var i = 0; i < scores.length; i++) {
+    createListItem(scores[i]);
   }
 }
 
@@ -85,9 +88,6 @@ function homePageCitySearchSubmit(event) {
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
   cityStatsView();
-  // console.log(cityData);
-  // console.log(cityData[0]);
-  // liAutofill();
 }
 
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
@@ -110,18 +110,10 @@ function getCities(city) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     var cityStats = xhr.response.categories;
-    // console.log(cityStats);
-    cityData.push(cityStats);
-    // console.log(cityData);
-    // console.log(cityData[0]);
+    createList(cityStats);
   });
   xhr.send();
 }
-
-// function liAutofill() {
-//   console.log(cityData);
-//   console.log(cityData[0]);
-// }
 
 // function populateListContent() {
 //   // var simpleCityData = cityData[0].categories;
