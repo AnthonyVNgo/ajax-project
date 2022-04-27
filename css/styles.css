@@ -1,3 +1,5 @@
+/* Background stuff */
+
 #clouds-container {
   width: 100vw;
 }
@@ -7,12 +9,41 @@
   top: 5rem;
   width: 100%;
   height: auto;
+  z-index: -1;
 }
 
 #sun {
   position: absolute;
   right: 0;
   top: 0;
+  z-index: -2;
+}
+
+.hills-desktop {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 -5px;
+  padding: 0;
+  z-index: -5;
+}
+
+.hills-desktop > svg {
+  width: 100vw;
+  height: 100px;
+}
+
+/* Homepage stuff */
+
+#home-view {
+  max-width: 300px;
+}
+
+#home-view > h1 {
+  text-align: center;
+}
+
+#home-view > h2 {
+  text-align: center;
 }
 
 /* Search bar stuff  */
@@ -52,29 +83,109 @@ input:focus {
   border: 2px solid #93e4a5;
 }
 
-/* Background stuff */
+/* Statspage stuff */
 
-.hills-desktop {
-  bottom: 0;
-  position: absolute;
-  margin: 0 0 -5px;
-  padding: 0;
+#summary {
+  display: none;
 }
 
-.hills-desktop > svg {
-  width: 100vw;
-}
-
-/* Main section text stuff */
-
-div.column-full.height-fit-content > h1 {
+#city-stats-view-city-name {
+  text-transform: capitalize;
   text-align: center;
   font-size: 2.8rem;
 }
 
-div.column-full.height-fit-content > h2 {
+#city-stats-view {
+  flex-basis: 750px;
+}
+
+li > div > p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0.4rem 0;
+}
+
+li > div {
+  padding: 0 1rem;
+}
+
+.stats-column > p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-item > p {
+  margin: 0;
   text-align: center;
-  margin-bottom: 3rem;
+}
+
+.overall-score {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: -1.5rem;
+  margin-bottom: 0.25rem;
+  position: relative;
+}
+
+/* underline styling start */
+.overall-score::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  margin-left: -5px;
+  width: 75px;
+  height: 14px;
+  background: #e9ffa9;
+  z-index: -1;
+}
+
+/* underline styling end */
+
+/* summary button styling start */
+div.justify-content-center > button {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #93e4a5;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+}
+
+/* summary button styling end */
+
+ul {
+  list-style-type: none;
+  margin: 2rem 0;
+  padding: 0;
+  height: 30vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+/* modal stuff */
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.293);
+  height: 100vh;
+  width: 100vw;
+}
+
+.modal {
+  flex-basis: 75%;
+  max-width: 400px;
+  height: fit-content;
+  background-color: white;
+  border-radius: 10px;
+  border: lightgreen 5px solid;
+  padding: 1rem;
 }
 
 /* Mobile UI stuff */
@@ -102,20 +213,15 @@ div.column-full.height-fit-content > h2 {
   flex-basis: 10%;
 }
 
-.nav-item > p {
-  margin: 0;
-  text-align: center;
-}
-
 /* Responsive Stuff */
 
-@media only screen and (min-width: 425px) {
+div.stats-column:nth-child(1) {
+  flex-basis: 75%;
+}
+
+@media only screen and (min-width: 600px) {
   body {
     overflow: hidden;
-  }
-
-  .mobile-nav-container {
-    display: none;
   }
 
   .height-100vh-modded {
@@ -130,8 +236,33 @@ div.column-full.height-fit-content > h2 {
     top: 5%;
   }
 
+  .hills-desktop > svg {
+    height: 150px;
+  }
+
   div.height-100vh-modded > div {
     flex-basis: 300px;
+  }
+
+  #summary-button {
+    display: none;
+  }
+
+  #summary {
+    display: block;
+  }
+
+  .stats-column {
+    flex-basis: 45%;
+  }
+
+  div.stats-column:nth-child(1) {
+    flex-basis: 45%;
+  }
+
+  #city-stats-view > div.row {
+    margin: 0.75rem 5% 0;
+    justify-content: space-between;
   }
 }
 

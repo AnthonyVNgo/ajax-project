@@ -27,21 +27,20 @@
   <body>
   <main>
 
-    <!-- Main Section -->
     <div class="container">
 
+      <!-- Home Page -->
+
       <div class="row justify-content-center align-content-center height-100vh-modded position-relative">
-        <div class="column-full height-fit-content">
+        <div id="home-view" class="column-75 height-fit-content">
           <h1>Happy Here</h1>
           <h2>Search urban areas and see quality of life scores</h2>
 
-          <!-- Search Bar -->
+          <!-- Search Bar on Home Page -->
           <form class="row">
             <div class="column-full">
               <div class="row justify-content-center position-relative">
                 <input id="search-bar" type="search" list="search-autofill" placeholder="Search city..." required>
-                <datalist id="search-autofill">
-                </datalist>
                 <div class="search-bar-icon-container">
                   <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
@@ -50,9 +49,33 @@
           </form>
         </div>
 
+        <!-- Stats Page -->
+        <div id="city-stats-view" class="column-full height-fit-content hidden">
+          <h1 id="city-stats-view-city-name"></h1>
+          <p class="overall-score"></p>
+          <div class="row justify-content-center">
+            <div class="stats-column">
+              <ul id="city-stats-view-city-stats">
+                <!-- <li>
+                <div class="row justify-content-space-between">
+                  <p>Housing</p>
+                  <p>7/10</p>
+                </div>
+              </li> -->
+              </ul>
+              <div class="row justify-content-center">
+                <button id="summary-button">City Summary</button>
+              </div>
+            </div>
+            <div id="summary" class="stats-column">
+              <p></p>
+            </div>
+          </div>
+        </div>
+
         <!-- Hills -->
         <div class="hills-desktop">
-          <svg height="150" viewBox="0 0 375 95" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 375 95" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
               d="M0 55.9058L15.3061 42.3732C31.8878 28.8406 62.5 1.77543 94.3878 0.271808C125 -2.73544 156.888 19.8189 187.5 37.8624C219.388 55.9058 250 67.9348 281.888 61.9203C312.5 55.9058 344.388 28.8406 359.694 15.308L375 1.77543V95H359.694C344.388 95 312.5 95 281.888 95C250 95 219.388 95 187.5 95C156.888 95 125 95 94.3878 95C62.5 95 31.8878 95 15.3061 95H0V55.9058Z"
               fill="#93E4A5" />
@@ -60,6 +83,15 @@
               d="M375 77L354.592 67C332.908 57 292.092 36 250 33C207.908 30 167.092 45 125 47C82.9082 48 42.0918 36 20.4082 30L3.57628e-06 25V95H20.4082C42.0918 95 82.9082 95 125 95C167.092 95 207.908 95 250 95C292.092 95 332.908 95 354.592 95H375V77Z"
               fill="#E9FFA9" />
           </svg>
+        </div>
+      </div>
+
+      <div class="modal-container hidden">
+        <div class="modal">
+          <p></p>
+          <div class="row justify-content-center">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -78,5 +110,6 @@
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
   </body>
+</html>
 </html>
 </html>

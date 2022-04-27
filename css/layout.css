@@ -1,6 +1,10 @@
+.hidden {
+  display: none !important;
+}
+
 .container {
-  max-width: 80%;
   margin: 0 auto;
+  position: relative;
 }
 
 .row {
@@ -27,6 +31,10 @@
   flex-basis: 100%;
 }
 
+.column-75 {
+  flex-basis: 75%;
+}
+
 .column-thirds {
   flex-basis: calc(100% / 3);
 }
@@ -45,8 +53,4 @@
 
 .height-100vh-modded {
   height: calc(100vh - 100px);
-}
-
-.hidden {
-  display: none;
 }
