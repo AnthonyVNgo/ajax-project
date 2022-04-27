@@ -1,3 +1,5 @@
+/* Background stuff */
+
 #clouds-container {
   width: 100vw;
 }
@@ -17,8 +19,31 @@
   z-index: -2;
 }
 
-#city-stats-view-city-name {
-  text-transform: capitalize;
+.hills-desktop {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 -5px;
+  padding: 0;
+  z-index: -5;
+}
+
+.hills-desktop > svg {
+  width: 100vw;
+  height: 100px;
+}
+
+/* Homepage stuff */
+
+#home-view {
+  max-width: 300px;
+}
+
+#home-view > h1 {
+  text-align: center;
+}
+
+#home-view > h2 {
+  text-align: center;
 }
 
 /* Search bar stuff  */
@@ -58,33 +83,21 @@ input:focus {
   border: 2px solid #93e4a5;
 }
 
-/* Background stuff */
+/* Statspage stuff */
 
-.hills-desktop {
-  bottom: 0;
-  position: absolute;
-  margin: 0 0 -5px;
-  padding: 0;
-  z-index: -5;
+#summary {
+  display: none;
 }
 
-.hills-desktop > svg {
-  width: 100vw;
-}
-
-/* Main section text stuff */
-
-div.column-full.height-fit-content > h1 {
+#city-stats-view-city-name {
+  text-transform: capitalize;
   text-align: center;
   font-size: 2.8rem;
 }
 
-div.column-full.height-fit-content > h2 {
-  text-align: center;
-  margin-bottom: 3rem;
+#city-stats-view {
+  flex-basis: 750px;
 }
-
-/* City stats view stuff */
 
 li > div > p {
   font-size: 18px;
@@ -94,6 +107,11 @@ li > div > p {
 
 li > div {
   padding: 0 1rem;
+}
+
+.stats-column > p {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .nav-item > p {
@@ -110,6 +128,8 @@ li > div {
   position: relative;
 }
 
+/* underline styling start */
+
 .overall-score::before {
   content: "";
   position: absolute;
@@ -121,11 +141,13 @@ li > div {
   z-index: -1;
 }
 
+/* underline styling end */
+
+/* summary button styling */
 div.justify-content-center > button {
   font-family: "DM Sans", sans-serif;
   font-size: 1rem;
   font-weight: bold;
-  margin-top: 0.75rem;
   background-color: #93e4a5;
   padding: 10px 15px;
   border: none;
@@ -134,14 +156,11 @@ div.justify-content-center > button {
 
 ul {
   list-style-type: none;
-  margin: 10px 0 0;
+  margin: 2rem 0;
   padding: 0;
-  height: 20vh;
+  height: 30vh;
   overflow: hidden;
   overflow-y: scroll;
-
-  /* border: solid 5px rgba(211, 211, 211, 0.457);
-  border-radius: 10px; */
 }
 
 /* modal stuff */
@@ -167,16 +186,6 @@ ul {
   border: lightgreen 5px solid;
   padding: 1rem;
 }
-
-/* li > div > p {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0.4rem 0;
-}
-
-li > div {
-  padding: 0 1rem;
-} */
 
 /* Mobile UI stuff */
 
@@ -205,6 +214,10 @@ li > div {
 
 /* Responsive Stuff */
 
+div.stats-column:nth-child(1) {
+  flex-basis: 75%;
+}
+
 @media only screen and (min-width: 600px) {
   body {
     overflow: hidden;
@@ -222,8 +235,33 @@ li > div {
     top: 5%;
   }
 
+  .hills-desktop > svg {
+    height: 150px;
+  }
+
   div.height-100vh-modded > div {
     flex-basis: 300px;
+  }
+
+  #summary-button {
+    display: none;
+  }
+
+  #summary {
+    display: block;
+  }
+
+  .stats-column {
+    flex-basis: 45%;
+  }
+
+  div.stats-column:nth-child(1) {
+    flex-basis: 45%;
+  }
+
+  #city-stats-view > div.row {
+    margin: 0.75rem 5% 0;
+    justify-content: space-between;
   }
 }
 

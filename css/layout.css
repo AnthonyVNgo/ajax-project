@@ -1,5 +1,5 @@
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .container {
@@ -29,6 +29,10 @@
 
 .column-full {
   flex-basis: 100%;
+}
+
+.column-75 {
+  flex-basis: 75%;
 }
 
 .column-thirds {

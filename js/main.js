@@ -7,10 +7,25 @@ var cityStatsViewContainer = document.querySelector('#city-stats-view');
 var homeViewContainer = document.querySelector('#home-view');
 var overAllScoreElement = document.querySelector('.overall-score');
 var xIcon = document.querySelector('.fa-xmark');
+var summaryButton = document.querySelector('#summary-button');
+var modalContainer = document.querySelector('.modal-container');
+
+function showModal() {
+  modalContainer.className = 'modal-container';
+}
+
+function hideModal() {
+  modalContainer.className = 'hidden';
+}
+
+function summaryModal(event) {
+  showModal();
+}
+
+summaryButton.addEventListener('click', summaryModal);
 
 function exitCitySummaryMobile(event) {
-  // document.querySelector('modalContainer').className = 'hidden';
-  // console.log('bang');
+  hideModal();
 }
 
 xIcon.addEventListener('click', exitCitySummaryMobile);
@@ -77,11 +92,19 @@ function updateCityStatsCityName(cityNameFromInput) {
   }
 }
 
-// function populateSummaryMobile(xhrResponseSummaryProperty) {
-//   var modalContainer = document.querySelector('.modal');
-//   var summaryElement = modalContainer.querySelector('p');
-//   summaryElement.innerHTML = xhrResponseSummaryProperty;
-// }
+function populateSummaryMobile(xhrResponseSummaryProperty) {
+  var modalContainer = document.querySelector('.modal');
+  var summaryElement = modalContainer.querySelector('p');
+  summaryElement.innerHTML = xhrResponseSummaryProperty;
+}
+
+function populateSummaryDesktop(xhrResponseSummaryProperty) {
+  var summaryDesktopContainer = document.querySelectorAll('.stats-column')[1];
+  // console.log(summaryDesktopContainer);
+  var summaryElement = summaryDesktopContainer.querySelector('p');
+  // console.log(summaryElement);
+  summaryElement.innerHTML = xhrResponseSummaryProperty;
+}
 
 function cityStatsView() {
   hideHomeView();
@@ -128,9 +151,11 @@ function getCities(city) {
     var cityStats = xhr.response.categories;
     createList(cityStats);
     // console.log(xhr.response.summary);
-    // var citySummary = xhr.response.summary;
+    var citySummary = xhr.response.summary;
     // console.log(citySummary);
     // createSummaryMobile(citySummary);
+    populateSummaryMobile(citySummary);
+    populateSummaryDesktop(citySummary);
   });
   xhr.send();
 }
