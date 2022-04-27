@@ -6,10 +6,14 @@ var cityStatsCityStatsList = document.querySelector('#city-stats-view-city-stats
 var cityStatsViewContainer = document.querySelector('#city-stats-view');
 var homeViewContainer = document.querySelector('#home-view');
 var overAllScoreElement = document.querySelector('.overall-score');
+var xIcon = document.querySelector('.fa-xmark');
 
-// data stuff
+function exitCitySummaryMobile(event) {
+  // document.querySelector('modalContainer').className = 'hidden';
+  // console.log('bang');
+}
 
-// var cityData = [];
+xIcon.addEventListener('click', exitCitySummaryMobile);
 
 // View Swapping Functions
 
@@ -35,8 +39,6 @@ function createListItem(score) {
   var liContainer = document.createElement('div');
   var liStatsElement = document.createElement('p');
   var liScoreElement = document.createElement('p');
-  // var overallScoreElement = Math.floor(score.score_out_of_10);
-  // console.log(overallScoreElement);
 
   liContainer.className = 'row justify-content-space-between';
 
@@ -47,15 +49,23 @@ function createListItem(score) {
   liContainer.appendChild(liStatsElement);
   liContainer.appendChild(liScoreElement);
   cityStatsCityStatsList.appendChild(liElement);
+
+  // Returning the score of each category so we can add and find the average for the overall score
+  return Math.floor(score.score_out_of_10);
 }
 
+// adds each of the 17 list items onto the ul element
 function createList(scores) {
-  // var scoreSum;
+  var sumAllScores = 0;
+
   for (var i = 0; i < scores.length; i++) {
-    createListItem(scores[i]);
+    sumAllScores += createListItem(scores[i]);
   }
+  var newSum = (Math.round(sumAllScores / 17));
+  overAllScore(newSum);
 }
 
+// updates the overall green highlited score in the city stats view
 function overAllScore(score) {
   overAllScoreElement.textContent = score + '/10';
 }
@@ -66,6 +76,12 @@ function updateCityStatsCityName(cityNameFromInput) {
     cityStatsCityNameElement.textContent = updatedCityStatCityName;
   }
 }
+
+// function populateSummaryMobile(xhrResponseSummaryProperty) {
+//   var modalContainer = document.querySelector('.modal');
+//   var summaryElement = modalContainer.querySelector('p');
+//   summaryElement.innerHTML = xhrResponseSummaryProperty;
+// }
 
 function cityStatsView() {
   hideHomeView();
@@ -111,32 +127,10 @@ function getCities(city) {
   xhr.addEventListener('load', function () {
     var cityStats = xhr.response.categories;
     createList(cityStats);
+    // console.log(xhr.response.summary);
+    // var citySummary = xhr.response.summary;
+    // console.log(citySummary);
+    // createSummaryMobile(citySummary);
   });
   xhr.send();
 }
-
-// function populateListContent() {
-//   // var simpleCityData = cityData[0].categories;
-//   console.log(cityData['0']);
-//   // for (var i = 0; i < cityStatsCityStatsList.children.length; i++) {
-//   //   if (i === 0) {
-//   //     cityStatsCityStatsList.children[i].querySelector('div').firstElementChild.textContent = consolidatedCityData[0].name;
-//   //     cityStatsCityStatsList.children[i].querySelector('div').lastElementChild.textContent = consolidatedCityData[0].score;
-//   //   } else if (i === 1) {
-//   //     cityStatsCityStatsList.children[i].querySelector('div').firstElementChild.textContent = 'yee';
-//   //     cityStatsCityStatsList.children[i].querySelector('div').lastElementChild.textContent = 'haw';
-//   //   } else if (i === 2) {
-//   //     cityStatsCityStatsList.children[i].querySelector('div').firstElementChild.textContent = 'yipee';
-//   //     cityStatsCityStatsList.children[i].querySelector('div').lastElementChild.textContent = 'kaiyay';
-//   //   } else if (i === 3) {
-//   //     cityStatsCityStatsList.children[i].querySelector('div').firstElementChild.textContent = 'motha';
-//   //     cityStatsCityStatsList.children[i].querySelector('div').lastElementChild.textContent = 'fffff';
-//   //   } else if (i === 4) {
-//   //     cityStatsCityStatsList.children[i].querySelector('div').firstElementChild.textContent = 'a';
-//   //     cityStatsCityStatsList.children[i].querySelector('div').lastElementChild.textContent = 'b';
-//   //   } else if (i === 5) {
-//   //     cityStatsCityStatsList.children[i].querySelector('div').firstElementChild.textContent = 'c';
-//   //     cityStatsCityStatsList.children[i].querySelector('div').lastElementChild.textContent = 'd';
-//   //   }
-//   // }
-// }

@@ -134,8 +134,38 @@ div.justify-content-center > button {
 
 ul {
   list-style-type: none;
-  margin: 0%;
+  margin: 10px 0 0;
   padding: 0;
+  height: 20vh;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  /* border: solid 5px rgba(211, 211, 211, 0.457);
+  border-radius: 10px; */
+}
+
+/* modal stuff */
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.293);
+  height: 100vh;
+  width: 100vw;
+}
+
+.modal {
+  flex-basis: 75%;
+  max-width: 400px;
+  height: fit-content;
+  background-color: white;
+  border-radius: 10px;
+  border: lightgreen 5px solid;
+  padding: 1rem;
 }
 
 /* li > div > p {
