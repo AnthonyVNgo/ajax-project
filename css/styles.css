@@ -129,7 +129,6 @@ li > div {
 }
 
 /* underline styling start */
-
 .overall-score::before {
   content: "";
   position: absolute;
@@ -143,7 +142,7 @@ li > div {
 
 /* underline styling end */
 
-/* summary button styling */
+/* summary button styling start */
 div.justify-content-center > button {
   font-family: "DM Sans", sans-serif;
   font-size: 1rem;
@@ -153,6 +152,8 @@ div.justify-content-center > button {
   border: none;
   border-radius: 10px;
 }
+
+/* summary button styling end */
 
 ul {
   list-style-type: none;
