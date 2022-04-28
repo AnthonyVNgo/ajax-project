@@ -9,6 +9,78 @@ var overAllScoreElement = document.querySelector('.overall-score');
 var xIcon = document.querySelector('.fa-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container');
+var backToSearchButton = document.querySelector('.back-to-search-container').querySelector('button');
+var favSkipContainer = document.querySelector('.fav-skip-container');
+var notificationContainer = document.querySelector('.notification-container');
+
+function removeStatsList() {
+  cityStatsCityStatsList.innerHTML = '';
+}
+
+function notificationPopUp() {
+  notificationContainer.className = 'notification-container';
+  setTimeout(hideNotificationPopUp, 750);
+}
+
+function hideNotificationPopUp() {
+  notificationContainer.className = 'notification-container notification-container-fade';
+}
+
+function populateNotification(favOrSkip) {
+  var notificationTextElement = notificationContainer.querySelector('p');
+  notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
+}
+
+var mobileFavSkipContainer = document.querySelector('.mobile-nav-container');
+
+// DESKTOP FAV AND SKIP BUTTONS
+
+function favSkipButtonClicked(event) {
+  var btnEventTarget = event.target.className;
+  if (btnEventTarget === 'fav-btn') {
+    addToFavorite();
+    notificationPopUp();
+    populateNotification('Favorite');
+  } else if (btnEventTarget === 'skip-btn') {
+    addToSkip();
+    notificationPopUp();
+    populateNotification('Skip');
+  }
+}
+
+favSkipContainer.addEventListener('click', favSkipButtonClicked);
+
+// MOBILE FAV AND SKIP BUTTONS
+
+function mobileFavSkipButtonClicked(event) {
+  if (event.target.className === 'skip-btn' || event.target.className === 'fa-regular fa-face-frown') {
+    addToSkip();
+    notificationPopUp();
+    populateNotification('Skip');
+  } else if (event.target.className === 'fav-btn' || event.target.className === 'fa-regular fa-face-smile-beam') {
+    addToFavorite();
+    notificationPopUp();
+    populateNotification('Favorite');
+  }
+}
+
+mobileFavSkipContainer.addEventListener('click', mobileFavSkipButtonClicked);
+
+function addToFavorite() {
+  var cityPropertiesForData = {};
+  cityPropertiesForData.name = cityStatsCityNameElement.textContent;
+  cityPropertiesForData.overallScore = overAllScoreElement.textContent;
+
+  data.favorite.push(cityPropertiesForData);
+}
+
+function addToSkip(event) {
+  var cityPropertiesForData = {};
+  cityPropertiesForData.name = cityStatsCityNameElement.textContent;
+  cityPropertiesForData.overallScore = overAllScoreElement.textContent;
+
+  data.skip.push(cityPropertiesForData);
+}
 
 function showModal() {
   modalContainer.className = 'modal-container';
@@ -37,6 +109,7 @@ function hideHomeView() {
 }
 function showHomeView() {
   homeViewContainer.className = 'column-full height-fit-content';
+  removeStatsList();
 }
 
 function showCityStatsView() {
@@ -100,9 +173,7 @@ function populateSummaryMobile(xhrResponseSummaryProperty) {
 
 function populateSummaryDesktop(xhrResponseSummaryProperty) {
   var summaryDesktopContainer = document.querySelectorAll('.stats-column')[1];
-  // console.log(summaryDesktopContainer);
   var summaryElement = summaryDesktopContainer.querySelector('p');
-  // console.log(summaryElement);
   summaryElement.innerHTML = xhrResponseSummaryProperty;
 }
 
@@ -110,13 +181,13 @@ function cityStatsView() {
   hideHomeView();
   showCityStatsView();
   overAllScore();
-  createList();
 }
 
 // Search Bar Submit Event
 
 function homePageCitySearchSubmit(event) {
   event.preventDefault();
+
   var inputValue = searchFormElement.querySelector('input').value;
 
   if (inputValue.search(' ') !== -1) {
@@ -127,6 +198,7 @@ function homePageCitySearchSubmit(event) {
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
   cityStatsView();
+  searchFormElement.reset();
 }
 
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
@@ -141,6 +213,14 @@ function searchButtonClick(event) {
 
 searchButtonElement.addEventListener('click', searchButtonClick);
 
+// Back to Search Button Desktop View
+
+function backToSearchButtonClick(event) {
+  hideCityStatsView();
+  showHomeView();
+}
+
+backToSearchButton.addEventListener('click', backToSearchButtonClick);
 // Ajax Data Stuff
 
 function getCities(city) {
@@ -150,10 +230,7 @@ function getCities(city) {
   xhr.addEventListener('load', function () {
     var cityStats = xhr.response.categories;
     createList(cityStats);
-    // console.log(xhr.response.summary);
     var citySummary = xhr.response.summary;
-    // console.log(citySummary);
-    // createSummaryMobile(citySummary);
     populateSummaryMobile(citySummary);
     populateSummaryDesktop(citySummary);
   });

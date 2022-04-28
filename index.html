@@ -56,12 +56,8 @@
           <div class="row justify-content-center">
             <div class="stats-column">
               <ul id="city-stats-view-city-stats">
-                <!-- <li>
-                <div class="row justify-content-space-between">
-                  <p>Housing</p>
-                  <p>7/10</p>
-                </div>
-              </li> -->
+                <li>
+                </li>
               </ul>
               <div class="row justify-content-center">
                 <button id="summary-button">City Summary</button>
@@ -70,6 +66,16 @@
             <div id="summary" class="stats-column">
               <p></p>
             </div>
+          </div>
+          <div class="fav-skip-container">
+            <button class="skip-btn">Skip</button>
+            <button class="fav-btn">Favorite</button>
+          </div>
+          <div class="back-to-search-container">
+            <button>Back To Search</button>
+          </div>
+          <div class="notification-container hidden">
+            <p></p>
           </div>
         </div>
 
@@ -96,13 +102,25 @@
       </div>
     </div>
 
-    <!-- Nav Section -->
-    <div class="row mobile-nav-container justify-content-center align-content-center">
+    <!--  MOBILE Nav Section -->
+    <div class="row mobile-nav-container justify-content-space-around align-content-center">
+      <div class="nav-item skip-btn">
+        <div class="row justify-content-center">
+          <i class="fa-regular fa-face-frown"></i>
+        </div>
+        <p class="skip-btn">Skip</p>
+      </div>
       <div id="search-btn" class="nav-item">
         <div class="row justify-content-center">
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <p>Search</p>
+      </div>
+      <div class="nav-item fav-btn">
+        <div class="row justify-content-center">
+          <i class="fa-regular fa-face-smile-beam"></i>
+        </div>
+        <p class="fav-btn">Favorite</p>
       </div>
     </div>
 
