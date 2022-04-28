@@ -106,9 +106,20 @@ li > div > p {
   justify-content: center;
   width: 100%;
   position: absolute;
-  background-color: red;
   top: 0;
   left: 0;
+  opacity: 1;
+}
+
+.notification-container-fade {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 2s ease-out;
 }
 
 .notification-container > p {

@@ -10,29 +10,57 @@ var xIcon = document.querySelector('.fa-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container');
 var backToSearchButton = document.querySelector('.back-to-search-container').querySelector('button');
-// var favButton = document.querySelector('.fav-btn');
-// var skipButton = document.querySelector('.skip-btn');
 var favSkipContainer = document.querySelector('.fav-skip-container');
 
-function favSkipButtonClicked(event) {
-  var btnEventTarget = event.target.innerHTML;
-  populateNotification(btnEventTarget);
-  // console.log(btnEventTarget);
-  if (btnEventTarget === 'Favorite') {
-    addToFavorite();
-    // console.log('bang');
-  } else {
-    addToSkip();
-    // console.log('bangarang');
-  }
+function removeStatsList() {
+  cityStatsCityStatsList.innerHTML = '';
 }
 
-favSkipContainer.addEventListener('click', favSkipButtonClicked);
+function notificationPopUp() {
+  var notificationContainer = document.querySelector('.notification-container');
+  notificationContainer.className = 'notification-container';
+  setTimeout(hideNotificationPopUp, 750);
+}
+
+function hideNotificationPopUp() {
+  var notificationContainer = document.querySelector('.notification-container');
+  notificationContainer.className = 'notification-container notification-container-fade';
+}
 
 function populateNotification(favOrSkip) {
   var notificationTextElement = document.querySelector('.notification-container').querySelector('p');
   notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
 }
+
+var mobileFavSkipContainer = document.querySelector('.mobile-nav-container');
+
+function favSkipButtonClicked(event) {
+  var btnEventTarget = event.target.innerHTML;
+  populateNotification(btnEventTarget);
+  if (btnEventTarget === 'Favorite') {
+    addToFavorite();
+    notificationPopUp();
+  } else if (btnEventTarget === 'Skip') {
+    addToSkip();
+    notificationPopUp();
+  }
+}
+
+favSkipContainer.addEventListener('click', favSkipButtonClicked);
+
+function mobileFavSkipButtonClicked(event) {
+  if (event.target.innerHTML === 'Skip' || event.target.className === 'fa-regular fa-face-frown') {
+    addToSkip();
+    notificationPopUp();
+    populateNotification('Skip');
+  } else if (event.target.innerHTML === 'Favorite' || event.target.className === 'fa-regular fa-face-smile-beam') {
+    addToFavorite();
+    notificationPopUp();
+    populateNotification('Favorite');
+  }
+}
+
+mobileFavSkipContainer.addEventListener('click', mobileFavSkipButtonClicked);
 
 function addToFavorite() {
   var cityPropertiesForData = {};
@@ -41,8 +69,6 @@ function addToFavorite() {
 
   data.favorite.push(cityPropertiesForData);
 }
-
-// favButton.addEventListener('click', addToFavorite);
 
 function addToSkip(event) {
   var cityPropertiesForData = {};
@@ -79,6 +105,7 @@ function hideHomeView() {
 }
 function showHomeView() {
   homeViewContainer.className = 'column-full height-fit-content';
+  removeStatsList();
 }
 
 function showCityStatsView() {
@@ -142,9 +169,7 @@ function populateSummaryMobile(xhrResponseSummaryProperty) {
 
 function populateSummaryDesktop(xhrResponseSummaryProperty) {
   var summaryDesktopContainer = document.querySelectorAll('.stats-column')[1];
-  // console.log(summaryDesktopContainer);
   var summaryElement = summaryDesktopContainer.querySelector('p');
-  // console.log(summaryElement);
   summaryElement.innerHTML = xhrResponseSummaryProperty;
 }
 
@@ -152,7 +177,6 @@ function cityStatsView() {
   hideHomeView();
   showCityStatsView();
   overAllScore();
-  createList();
 }
 
 // Search Bar Submit Event
@@ -170,6 +194,7 @@ function homePageCitySearchSubmit(event) {
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
   cityStatsView();
+  searchFormElement.reset();
 }
 
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
@@ -201,10 +226,7 @@ function getCities(city) {
   xhr.addEventListener('load', function () {
     var cityStats = xhr.response.categories;
     createList(cityStats);
-    // console.log(xhr.response.summary);
     var citySummary = xhr.response.summary;
-    // console.log(citySummary);
-    // createSummaryMobile(citySummary);
     populateSummaryMobile(citySummary);
     populateSummaryDesktop(citySummary);
   });
