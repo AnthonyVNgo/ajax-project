@@ -85,8 +85,58 @@ input:focus {
 
 /* Statspage stuff */
 
+li > div > p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0.4rem 0;
+}
+
+.stats-column > p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-item > p {
+  margin: 0;
+  text-align: center;
+}
+
+.notification-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  background-color: red;
+  top: 0;
+  left: 0;
+}
+
+.notification-container > p {
+  padding: 2rem 3rem;
+  margin: 2rem 2rem 0;
+  background-color: white;
+  border: lightgreen 5px solid;
+  border-radius: 10px;
+  text-transform: capitalize;
+}
+
 #summary {
   display: none;
+}
+
+#summary > p {
+  margin: 2rem 0;
+  height: 30vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+#summary > p::-webkit-scrollbar {
+  display: none;
+}
+
+#summary > p > p {
+  margin: 0 0 1rem;
 }
 
 #city-stats-view-city-name {
@@ -99,24 +149,8 @@ input:focus {
   flex-basis: 750px;
 }
 
-li > div > p {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0.4rem 0;
-}
-
 li > div {
   padding: 0 1rem;
-}
-
-.stats-column > p {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.nav-item > p {
-  margin: 0;
-  text-align: center;
 }
 
 .overall-score {
@@ -164,6 +198,10 @@ ul {
   overflow-y: scroll;
 }
 
+ul::-webkit-scrollbar {
+  display: none;
+}
+
 /* modal stuff */
 
 .modal-container {
@@ -209,6 +247,12 @@ ul {
   text-align: center;
 }
 
+.fa-regular {
+  font-size: 2rem;
+  display: inline;
+  text-align: center;
+}
+
 .nav-item {
   flex-basis: 10%;
 }
@@ -217,6 +261,14 @@ ul {
 
 div.stats-column:nth-child(1) {
   flex-basis: 75%;
+}
+
+.fav-skip-container {
+  display: none;
+}
+
+.back-to-search-container {
+  display: none;
 }
 
 @media only screen and (min-width: 600px) {
@@ -260,9 +312,40 @@ div.stats-column:nth-child(1) {
     flex-basis: 45%;
   }
 
-  #city-stats-view > div.row {
+  #city-stats-view > div.justify-content-center {
     margin: 0.75rem 5% 0;
     justify-content: space-between;
+  }
+
+  .fav-skip-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .fav-skip-container > button {
+    margin: 0 2rem;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #93e4a5;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+  }
+
+  .back-to-search-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .back-to-search-container > button {
+    margin: 1.5rem 0 0;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
   }
 }
 

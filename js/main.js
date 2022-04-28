@@ -9,6 +9,48 @@ var overAllScoreElement = document.querySelector('.overall-score');
 var xIcon = document.querySelector('.fa-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container');
+var backToSearchButton = document.querySelector('.back-to-search-container').querySelector('button');
+// var favButton = document.querySelector('.fav-btn');
+// var skipButton = document.querySelector('.skip-btn');
+var favSkipContainer = document.querySelector('.fav-skip-container');
+
+function favSkipButtonClicked(event) {
+  var btnEventTarget = event.target.innerHTML;
+  populateNotification(btnEventTarget);
+  // console.log(btnEventTarget);
+  if (btnEventTarget === 'Favorite') {
+    addToFavorite();
+    // console.log('bang');
+  } else {
+    addToSkip();
+    // console.log('bangarang');
+  }
+}
+
+favSkipContainer.addEventListener('click', favSkipButtonClicked);
+
+function populateNotification(favOrSkip) {
+  var notificationTextElement = document.querySelector('.notification-container').querySelector('p');
+  notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
+}
+
+function addToFavorite() {
+  var cityPropertiesForData = {};
+  cityPropertiesForData.name = cityStatsCityNameElement.innerHTML;
+  cityPropertiesForData.overallScore = overAllScoreElement.innerHTML;
+
+  data.favorite.push(cityPropertiesForData);
+}
+
+// favButton.addEventListener('click', addToFavorite);
+
+function addToSkip(event) {
+  var cityPropertiesForData = {};
+  cityPropertiesForData.name = cityStatsCityNameElement.innerHTML;
+  cityPropertiesForData.overallScore = overAllScoreElement.innerHTML;
+
+  data.skip.push(cityPropertiesForData);
+}
 
 function showModal() {
   modalContainer.className = 'modal-container';
@@ -117,6 +159,7 @@ function cityStatsView() {
 
 function homePageCitySearchSubmit(event) {
   event.preventDefault();
+
   var inputValue = searchFormElement.querySelector('input').value;
 
   if (inputValue.search(' ') !== -1) {
@@ -141,6 +184,14 @@ function searchButtonClick(event) {
 
 searchButtonElement.addEventListener('click', searchButtonClick);
 
+// Back to Search Button Desktop View
+
+function backToSearchButtonClick(event) {
+  hideCityStatsView();
+  showHomeView();
+}
+
+backToSearchButton.addEventListener('click', backToSearchButtonClick);
 // Ajax Data Stuff
 
 function getCities(city) {
