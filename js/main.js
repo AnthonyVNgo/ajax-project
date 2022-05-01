@@ -117,11 +117,9 @@ document.addEventListener('keydown', favoriteAndSkipListView);
 function checkIfListIncludes(input, value) {
   for (var i = 0; i < input.length; i++) {
     if (input[i].name === value) {
-      // console.log(true);
       return true;
     }
   }
-  // console.log(false);
   return false;
 }
 
@@ -173,11 +171,20 @@ function createFavSkipListItem(name, score) {
   favAndSkipUlElement.appendChild(liElement);
 }
 
-function createFavSkipList(favOrSkipArr) {
-  for (var i = 0; i < favOrSkipArr.length; i++) {
-    createFavSkipListItem(favOrSkipArr[i].name, favOrSkipArr[i].overallScore);
+function createFavSkipList(listArr) {
+  for (var i = 0; i < listArr.length; i++) {
+    createFavSkipListItem(listArr[i].name, listArr[i].overallScore);
   }
 }
+
+// function checkCityBooleanProperty(input) {
+//   for (var i = 0; i < input.length; i++) {
+//     if (input[i].boolean === true) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
 
 function showModal() {
   modalContainer.className = 'modal-container';
@@ -215,13 +222,11 @@ function showHomeView() {
   homeViewContainer.className = 'column-full height-fit-content';
   removeStatsList();
   data.view = 'home';
-
 }
 
 function showCityStatsView() {
   cityStatsViewContainer.className = 'column-full height-fit-content';
   data.view = 'stats';
-
 }
 
 function hideCityStatsView() {
