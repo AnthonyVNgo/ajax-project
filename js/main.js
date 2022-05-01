@@ -125,6 +125,7 @@ function addToFavorite() {
   } else if (data.list.length !== 0) {
     for (var i = 0; i < data.favorite.length; i++) {
       if (data.favorite[i].name === cityStatsCityNameElement.textContent) {
+        data.list[i].boolean = true;
         break;
       } else if (data.list[i].name !== cityStatsCityNameElement.textContent) {
         city.name = cityStatsCityNameElement.textContent;
@@ -172,8 +173,9 @@ function addToSkip() {
     city.boolean = false;
     data.list.push(city);
   } else if (data.list.length !== 0) {
-    for (var i = 0; i < data.favorite.length; i++) {
-      if (data.favorite[i].name === cityStatsCityNameElement.textContent) {
+    for (var i = 0; i < data.list.length; i++) {
+      if (data.list[i].name === cityStatsCityNameElement.textContent) {
+        data.list[i].boolean = false;
         break;
       } else if (data.list[i].name !== cityStatsCityNameElement.textContent) {
         city.name = cityStatsCityNameElement.textContent;

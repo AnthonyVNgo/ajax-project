@@ -1,7 +1,7 @@
 /* exported data */
 var data = {
   pageview: null,
-  favorite: [],
-  skip: [],
+  // favorite: [],
+  // skip: [],
   list: []
 };
