@@ -2,5 +2,6 @@
 var data = {
   pageview: null,
   favorite: [],
-  skip: []
+  skip: [],
+  list: []
 };

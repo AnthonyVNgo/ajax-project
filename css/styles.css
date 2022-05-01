@@ -89,6 +89,11 @@ li > div > p {
   font-size: 18px;
   font-weight: bold;
   margin: 0.4rem 0;
+  text-transform: capitalize;
+}
+
+.saved-list-column {
+  flex-basis: 75%;
 }
 
 .stats-column > p {
@@ -148,6 +153,12 @@ li > div > p {
 
 #summary > p > p {
   margin: 0 0 1rem;
+}
+
+#list-title {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 2.8rem;
 }
 
 #city-stats-view-city-name {
@@ -313,6 +324,10 @@ div.stats-column:nth-child(1) {
 
   #summary {
     display: block;
+  }
+
+  .saved-list-column {
+    flex-basis: 90%;
   }
 
   .stats-column {
