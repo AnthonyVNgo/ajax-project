@@ -41,7 +41,8 @@ function favoriteAndSkipListView(event) {
     showFavAndSkipListView();
     hideHomeView();
     hideCityStatsView();
-    createFavSkipList(data.favorite);
+    // createFavSkipList(data.list);
+    checkCityBooleanProperty(true);
   } else if (event.key === 'S') {
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
@@ -52,7 +53,8 @@ function favoriteAndSkipListView(event) {
     showFavAndSkipListView();
     hideHomeView();
     hideCityStatsView();
-    createFavSkipList(data.skip);
+    // createFavSkipList(data.list);
+    checkCityBooleanProperty(false);
   }
 
 }
@@ -171,20 +173,20 @@ function createFavSkipListItem(name, score) {
   favAndSkipUlElement.appendChild(liElement);
 }
 
-function createFavSkipList(listArr) {
-  for (var i = 0; i < listArr.length; i++) {
-    createFavSkipListItem(listArr[i].name, listArr[i].overallScore);
+// function createFavSkipList(listArr) {
+//   for (var i = 0; i < listArr.length; i++) {
+//     createFavSkipListItem(listArr[i].name, listArr[i].overallScore);
+//   }
+// }
+
+function checkCityBooleanProperty(booleanValue) {
+  for (var i = 0; i < data.list.length; i++) {
+    if (data.list[i].boolean === booleanValue) {
+      createFavSkipListItem(data.list[i].name, data.list[i].overallScore);
+      // console.log('Function checkCityBooleanProperty fired');
+    }
   }
 }
-
-// function checkCityBooleanProperty(input) {
-//   for (var i = 0; i < input.length; i++) {
-//     if (input[i].boolean === true) {
-//       return true;
-//     }
-//   }
-//   return false;
-// }
 
 function showModal() {
   modalContainer.className = 'modal-container';
