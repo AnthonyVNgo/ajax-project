@@ -159,6 +159,7 @@ li > div > p {
   text-transform: capitalize;
   text-align: center;
   font-size: 2.8rem;
+  position: relative;
 }
 
 #city-stats-view-city-name {
@@ -184,6 +185,22 @@ li > div {
   position: relative;
 }
 
+#list-title::before {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 16.5%;
+  margin-left: -5px;
+  width: 70%;
+  height: 14px;
+  background: #e9ffa9;
+  z-index: -1;
+}
+
+ul#fav-and-skip-list {
+  margin: 0 0 2rem;
+}
+
 /* underline styling start */
 .overall-score::before {
   content: "";
@@ -206,7 +223,7 @@ div.justify-content-center > button {
   background-color: #93e4a5;
   padding: 10px 15px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* summary button styling end */
@@ -349,14 +366,15 @@ div.stats-column:nth-child(1) {
   }
 
   .fav-skip-container > button {
-    margin: 0 2rem;
+    margin: 0 0.75rem;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
-    font-weight: bold;
+
+    /* font-weight: bold; */
     background-color: #93e4a5;
     padding: 10px 15px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100px;
   }
 
@@ -369,7 +387,8 @@ div.stats-column:nth-child(1) {
     margin: 1.5rem 0 0;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
-    font-weight: bold;
+
+    /* font-weight: bold; */
     border: none;
     background-color: transparent;
   }
