@@ -19,19 +19,51 @@ var containerElement = document.querySelector('.container');
 // PAGE LOAD VIEWS
 // data.pageview = null, favorite, skip, home, stats
 
+function lastSearchOnLoad(lastsearch) {
+  updateCityStatsCityName(lastsearch);
+  getCities(lastsearch);
+  cityStatsView();
+}
+
+function favoriteView() {
+  showFavAndSkipListView();
+  hideHomeView();
+  hideCityStatsView();
+  checkCityBooleanProperty(true);
+  document.querySelector('#list-title').textContent = 'Favorites';
+}
+
+function skipView() {
+  showFavAndSkipListView();
+  hideHomeView();
+  hideCityStatsView();
+  checkCityBooleanProperty(false);
+  document.querySelector('#list-title').textContent = 'Skip';
+}
+
+function pageLoadViews() {
+  if (data.pageview === 'home') {
+    homeView();
+  } else if (data.pageview === 'stats') {
+    // cityStatsView();
+    lastSearchOnLoad(data.lastsearch);
+  } else if (data.pageview === 'favorite') {
+    favoriteView();
+  } else if (data.pageview === 'skip') {
+    skipView();
+  }
+}
+
+function contentLoaded(event) {
+  pageLoadViews();
+}
+document.addEventListener('DOMContentLoaded', contentLoaded);
+
 function homeView() {
   showHomeView();
   hideCityStatsView();
   hideFavAndSkipListView();
 }
-
-// function pageLoadViews() {
-//   if (data.pageview === null || data.pageview === 'home') {
-//     homeView();
-//   } else if (data.pageview === 'stats') {
-//     cityStatsView();
-//   }
-// }
 
 function backToSearchButtonClick(event) {
   if (event.target.className === 'search-btn') {
@@ -321,6 +353,7 @@ function homePageCitySearchSubmit(event) {
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
   cityStatsView();
+  data.lastsearch = inputValue;
   searchFormElement.reset();
 }
 

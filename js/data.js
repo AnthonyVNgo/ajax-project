@@ -3,7 +3,8 @@ var data = {
   pageview: null,
   // favorite: [],
   // skip: [],
-  list: []
+  list: [],
+  lastsearch: null
 };
 
 var previousDataListJSON = localStorage.getItem('data-model');
