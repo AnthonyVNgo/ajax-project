@@ -6,15 +6,15 @@ var data = {
   list: []
 };
 
-var previousDataListJSON = localStorage.getItem('javascript-local-storage');
+var previousDataListJSON = localStorage.getItem('data-model');
 
 if (previousDataListJSON !== null) {
-  data.list = JSON.parse(previousDataListJSON);
+  data = JSON.parse(previousDataListJSON);
 }
 
 function stringifyFunction(event) {
-  var dataListJSON = JSON.stringify(data.list);
-  localStorage.setItem('javascript-local-storage', dataListJSON);
+  var dataModelJSON = JSON.stringify(data);
+  localStorage.setItem('data-model', dataModelJSON);
 }
 
 window.addEventListener('beforeunload', stringifyFunction);
