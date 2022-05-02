@@ -125,11 +125,11 @@ function checkIfListIncludes(input, value) {
   return false;
 }
 
-function addToList() {
+function addToList(booleanInput) {
   var city = {};
   city.name = cityStatsCityNameElement.textContent;
   city.overallScore = overAllScoreElement.textContent;
-  city.boolean = true;
+  city.boolean = booleanInput;
   data.list.push(city);
 }
 
@@ -143,7 +143,7 @@ function updateCityBoolean(textContent, booleanValue) {
 
 function addToFavorite() {
   if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
-    addToList();
+    addToList(true);
   } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
     updateCityBoolean(cityStatsCityNameElement.textContent, true);
   }
@@ -151,7 +151,7 @@ function addToFavorite() {
 
 function addToSkip() {
   if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
-    addToList();
+    addToList(false);
   } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
     updateCityBoolean(cityStatsCityNameElement.textContent, false);
   }
