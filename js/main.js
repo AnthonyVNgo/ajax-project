@@ -9,12 +9,102 @@ var overAllScoreElement = document.querySelector('.overall-score');
 var xIcon = document.querySelector('.fa-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container');
-var backToSearchButton = document.querySelector('.back-to-search-container').querySelector('button');
 var favSkipContainer = document.querySelector('.fav-skip-container');
 var notificationContainer = document.querySelector('.notification-container');
+var mobileFavSkipContainer = document.querySelector('.mobile-nav-container');
+var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
+var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
+var containerElement = document.querySelector('.container');
 
-function removeStatsList() {
-  cityStatsCityStatsList.innerHTML = '';
+function lastSearchOnLoad(lastsearch) {
+  updateCityStatsCityName(lastsearch);
+  getCities(lastsearch);
+  cityStatsView();
+}
+
+function favoriteView() {
+  showFavAndSkipListView();
+  hideHomeView();
+  hideCityStatsView();
+  checkCityBooleanProperty(true);
+  document.querySelector('#list-title').textContent = 'Favorites';
+}
+
+function skipView() {
+  showFavAndSkipListView();
+  hideHomeView();
+  hideCityStatsView();
+  checkCityBooleanProperty(false);
+  document.querySelector('#list-title').textContent = 'Skip';
+}
+
+function pageLoadViews() {
+  if (data.pageview === 'home') {
+    homeView();
+  } else if (data.pageview === 'stats') {
+    lastSearchOnLoad(data.lastsearch);
+  } else if (data.pageview === 'favorite') {
+    favoriteView();
+  } else if (data.pageview === 'skip') {
+    skipView();
+  }
+}
+
+function contentLoaded(event) {
+  pageLoadViews();
+}
+document.addEventListener('DOMContentLoaded', contentLoaded);
+
+function homeView() {
+  showHomeView();
+  hideCityStatsView();
+  hideFavAndSkipListView();
+}
+
+function backToSearchButtonClick(event) {
+  if (event.target.className === 'search-btn') {
+    homeView();
+  }
+}
+
+containerElement.addEventListener('click', backToSearchButtonClick);
+
+function favoriteAndSkipListView(event) {
+  var listTitleElement = document.querySelector('#list-title');
+
+  if (event.key === 'F') {
+    while (favAndSkipUlElement.childElementCount > 0) {
+      data.pageview = 'favorite';
+      favAndSkipUlElement.firstChild.remove();
+    }
+
+    data.pageview = 'favorite';
+    listTitleElement.textContent = 'Favorites';
+    showFavAndSkipListView();
+    hideHomeView();
+    hideCityStatsView();
+    checkCityBooleanProperty(true);
+  } else if (event.key === 'S') {
+    data.pageview = 'skip';
+    while (favAndSkipUlElement.childElementCount > 0) {
+      favAndSkipUlElement.firstChild.remove();
+    }
+
+    data.pageview = 'skip';
+    listTitleElement.textContent = 'Skipped';
+    showFavAndSkipListView();
+    hideHomeView();
+    hideCityStatsView();
+    checkCityBooleanProperty(false);
+  }
+}
+
+function showFavAndSkipListView() {
+  favAndSkipView.className = 'column-full height-fit-content';
+}
+
+function hideFavAndSkipListView() {
+  favAndSkipView.className = 'hidden';
 }
 
 function notificationPopUp() {
@@ -31,10 +121,6 @@ function populateNotification(favOrSkip) {
   notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
 }
 
-var mobileFavSkipContainer = document.querySelector('.mobile-nav-container');
-
-// DESKTOP FAV AND SKIP BUTTONS
-
 function favSkipButtonClicked(event) {
   var btnEventTarget = event.target.className;
   if (btnEventTarget === 'fav-btn') {
@@ -50,8 +136,6 @@ function favSkipButtonClicked(event) {
 
 favSkipContainer.addEventListener('click', favSkipButtonClicked);
 
-// MOBILE FAV AND SKIP BUTTONS
-
 function mobileFavSkipButtonClicked(event) {
   if (event.target.className === 'skip-btn' || event.target.className === 'fa-regular fa-face-frown') {
     addToSkip();
@@ -66,20 +150,71 @@ function mobileFavSkipButtonClicked(event) {
 
 mobileFavSkipContainer.addEventListener('click', mobileFavSkipButtonClicked);
 
-function addToFavorite() {
-  var cityPropertiesForData = {};
-  cityPropertiesForData.name = cityStatsCityNameElement.textContent;
-  cityPropertiesForData.overallScore = overAllScoreElement.textContent;
+document.addEventListener('keydown', favoriteAndSkipListView);
 
-  data.favorite.push(cityPropertiesForData);
+function checkIfListIncludes(input, value) {
+  for (var i = 0; i < input.length; i++) {
+    if (input[i].name === value) {
+      return true;
+    }
+  }
+  return false;
 }
 
-function addToSkip(event) {
-  var cityPropertiesForData = {};
-  cityPropertiesForData.name = cityStatsCityNameElement.textContent;
-  cityPropertiesForData.overallScore = overAllScoreElement.textContent;
+function addToList(booleanInput) {
+  var city = {};
+  city.name = cityStatsCityNameElement.textContent;
+  city.overallScore = overAllScoreElement.textContent;
+  city.boolean = booleanInput;
+  data.list.push(city);
+}
 
-  data.skip.push(cityPropertiesForData);
+function updateCityBoolean(textContent, booleanValue) {
+  for (var i = 0; i < data.list.length; i++) {
+    if (data.list[i].name === textContent) {
+      data.list[i].boolean = booleanValue;
+    }
+  }
+}
+
+function addToFavorite() {
+  if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
+    addToList(true);
+  } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
+    updateCityBoolean(cityStatsCityNameElement.textContent, true);
+  }
+}
+
+function addToSkip() {
+  if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
+    addToList(false);
+  } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
+    updateCityBoolean(cityStatsCityNameElement.textContent, false);
+  }
+}
+
+function createFavSkipListItem(name, score) {
+  var liElement = document.createElement('li');
+  var liContainer = document.createElement('div');
+  var liStatsElement = document.createElement('p');
+  var liScoreElement = document.createElement('p');
+
+  liContainer.className = 'row justify-content-space-between';
+  liStatsElement.textContent = name;
+  liScoreElement.textContent = score;
+
+  liElement.appendChild(liContainer);
+  liContainer.appendChild(liStatsElement);
+  liContainer.appendChild(liScoreElement);
+  favAndSkipUlElement.appendChild(liElement);
+}
+
+function checkCityBooleanProperty(booleanValue) {
+  for (var i = 0; i < data.list.length; i++) {
+    if (data.list[i].boolean === booleanValue) {
+      createFavSkipListItem(data.list[i].name, data.list[i].overallScore);
+    }
+  }
 }
 
 function showModal() {
@@ -102,25 +237,30 @@ function exitCitySummaryMobile(event) {
 
 xIcon.addEventListener('click', exitCitySummaryMobile);
 
-// View Swapping Functions
-
 function hideHomeView() {
   homeViewContainer.className = 'hidden';
 }
+
+function removeStatsList() {
+  while (cityStatsCityStatsList.childElementCount > 0) {
+    cityStatsCityStatsList.firstChild.remove();
+  }
+}
+
 function showHomeView() {
   homeViewContainer.className = 'column-full height-fit-content';
   removeStatsList();
+  data.pageview = 'home';
 }
 
 function showCityStatsView() {
   cityStatsViewContainer.className = 'column-full height-fit-content';
+  data.pageview = 'stats';
 }
 
 function hideCityStatsView() {
   cityStatsViewContainer.className = 'hidden';
 }
-
-// City Stats View Stuff
 
 function createListItem(score) {
   var liElement = document.createElement('li');
@@ -137,12 +277,9 @@ function createListItem(score) {
   liContainer.appendChild(liStatsElement);
   liContainer.appendChild(liScoreElement);
   cityStatsCityStatsList.appendChild(liElement);
-
-  // Returning the score of each category so we can add and find the average for the overall score
   return Math.floor(score.score_out_of_10);
 }
 
-// adds each of the 17 list items onto the ul element
 function createList(scores) {
   var sumAllScores = 0;
 
@@ -153,7 +290,6 @@ function createList(scores) {
   overAllScore(newSum);
 }
 
-// updates the overall green highlited score in the city stats view
 function overAllScore(score) {
   overAllScoreElement.textContent = score + '/10';
 }
@@ -183,8 +319,6 @@ function cityStatsView() {
   overAllScore();
 }
 
-// Search Bar Submit Event
-
 function homePageCitySearchSubmit(event) {
   event.preventDefault();
 
@@ -198,30 +332,20 @@ function homePageCitySearchSubmit(event) {
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
   cityStatsView();
+  data.lastsearch = inputValue;
   searchFormElement.reset();
 }
 
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
 
-// Mobile Nav Search Button
-
 function searchButtonClick(event) {
   searchBarElement.focus();
   hideCityStatsView();
   showHomeView();
+  hideFavAndSkipListView();
 }
 
 searchButtonElement.addEventListener('click', searchButtonClick);
-
-// Back to Search Button Desktop View
-
-function backToSearchButtonClick(event) {
-  hideCityStatsView();
-  showHomeView();
-}
-
-backToSearchButton.addEventListener('click', backToSearchButtonClick);
-// Ajax Data Stuff
 
 function getCities(city) {
   var xhr = new XMLHttpRequest();

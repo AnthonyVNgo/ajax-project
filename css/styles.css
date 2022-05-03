@@ -89,6 +89,11 @@ li > div > p {
   font-size: 18px;
   font-weight: bold;
   margin: 0.4rem 0;
+  text-transform: capitalize;
+}
+
+.saved-list-column {
+  flex-basis: 75%;
 }
 
 .stats-column > p {
@@ -150,6 +155,13 @@ li > div > p {
   margin: 0 0 1rem;
 }
 
+#list-title {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 2.8rem;
+  position: relative;
+}
+
 #city-stats-view-city-name {
   text-transform: capitalize;
   text-align: center;
@@ -171,6 +183,22 @@ li > div {
   margin-top: -1.5rem;
   margin-bottom: 0.25rem;
   position: relative;
+}
+
+#list-title::before {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 16.5%;
+  margin-left: -5px;
+  width: 70%;
+  height: 14px;
+  background: #e9ffa9;
+  z-index: -1;
+}
+
+ul#fav-and-skip-list {
+  margin: 0 0 2rem;
 }
 
 /* underline styling start */
@@ -195,7 +223,7 @@ div.justify-content-center > button {
   background-color: #93e4a5;
   padding: 10px 15px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* summary button styling end */
@@ -315,6 +343,10 @@ div.stats-column:nth-child(1) {
     display: block;
   }
 
+  .saved-list-column {
+    flex-basis: 90%;
+  }
+
   .stats-column {
     flex-basis: 45%;
   }
@@ -334,14 +366,15 @@ div.stats-column:nth-child(1) {
   }
 
   .fav-skip-container > button {
-    margin: 0 2rem;
+    margin: 0 0.75rem;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
-    font-weight: bold;
+
+    /* font-weight: bold; */
     background-color: #93e4a5;
     padding: 10px 15px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100px;
   }
 
@@ -354,7 +387,8 @@ div.stats-column:nth-child(1) {
     margin: 1.5rem 0 0;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
-    font-weight: bold;
+
+    /* font-weight: bold; */
     border: none;
     background-color: transparent;
   }
