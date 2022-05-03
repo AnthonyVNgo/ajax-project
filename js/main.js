@@ -16,9 +16,6 @@ var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
 var containerElement = document.querySelector('.container');
 
-// PAGE LOAD VIEWS
-// data.pageview = null, favorite, skip, home, stats
-
 function lastSearchOnLoad(lastsearch) {
   updateCityStatsCityName(lastsearch);
   getCities(lastsearch);
@@ -45,7 +42,6 @@ function pageLoadViews() {
   if (data.pageview === 'home') {
     homeView();
   } else if (data.pageview === 'stats') {
-    // cityStatsView();
     lastSearchOnLoad(data.lastsearch);
   } else if (data.pageview === 'favorite') {
     favoriteView();
@@ -68,9 +64,6 @@ function homeView() {
 function backToSearchButtonClick(event) {
   if (event.target.className === 'search-btn') {
     homeView();
-    // hideCityStatsView();
-    // showHomeView();
-    // hideFavAndSkipListView();
   }
 }
 
@@ -128,8 +121,6 @@ function populateNotification(favOrSkip) {
   notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
 }
 
-// DESKTOP FAV AND SKIP BUTTONS
-
 function favSkipButtonClicked(event) {
   var btnEventTarget = event.target.className;
   if (btnEventTarget === 'fav-btn') {
@@ -144,8 +135,6 @@ function favSkipButtonClicked(event) {
 }
 
 favSkipContainer.addEventListener('click', favSkipButtonClicked);
-
-// MOBILE FAV AND SKIP BUTTONS
 
 function mobileFavSkipButtonClicked(event) {
   if (event.target.className === 'skip-btn' || event.target.className === 'fa-regular fa-face-frown') {
@@ -248,8 +237,6 @@ function exitCitySummaryMobile(event) {
 
 xIcon.addEventListener('click', exitCitySummaryMobile);
 
-// View Swapping Functions
-
 function hideHomeView() {
   homeViewContainer.className = 'hidden';
 }
@@ -275,8 +262,6 @@ function hideCityStatsView() {
   cityStatsViewContainer.className = 'hidden';
 }
 
-// City Stats View Stuff
-
 function createListItem(score) {
   var liElement = document.createElement('li');
   var liContainer = document.createElement('div');
@@ -292,12 +277,9 @@ function createListItem(score) {
   liContainer.appendChild(liStatsElement);
   liContainer.appendChild(liScoreElement);
   cityStatsCityStatsList.appendChild(liElement);
-
-  // Returning the score of each category so we can add and find the average for the overall score
   return Math.floor(score.score_out_of_10);
 }
 
-// adds each of the 17 list items onto the ul element
 function createList(scores) {
   var sumAllScores = 0;
 
@@ -308,7 +290,6 @@ function createList(scores) {
   overAllScore(newSum);
 }
 
-// updates the overall green highlited score in the city stats view
 function overAllScore(score) {
   overAllScoreElement.textContent = score + '/10';
 }
@@ -338,8 +319,6 @@ function cityStatsView() {
   overAllScore();
 }
 
-// Search Bar Submit Event
-
 function homePageCitySearchSubmit(event) {
   event.preventDefault();
 
@@ -359,8 +338,6 @@ function homePageCitySearchSubmit(event) {
 
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
 
-// Mobile Nav Search Button
-
 function searchButtonClick(event) {
   searchBarElement.focus();
   hideCityStatsView();
@@ -369,10 +346,6 @@ function searchButtonClick(event) {
 }
 
 searchButtonElement.addEventListener('click', searchButtonClick);
-
-// Back to Search Button Desktop View
-
-// Ajax Data Stuff
 
 function getCities(city) {
   var xhr = new XMLHttpRequest();
