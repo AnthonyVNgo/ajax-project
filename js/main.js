@@ -16,6 +16,23 @@ var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
 var containerElement = document.querySelector('.container');
 
+function removeFromDataList(cityName) {
+  for (var i = 0; i < data.list.length; i++) {
+    if (cityName === data.list[i].name) {
+      data.list.splice(i, 1);
+    }
+  }
+}
+
+function removeFromFavSkipList(event) {
+  if (event.target.tagName === 'DIV') {
+    removeFromDataList(event.target.querySelector('p').textContent);
+    favAndSkipUlElement.removeChild(event.target.parentNode);
+  }
+}
+
+favAndSkipUlElement.addEventListener('click', removeFromFavSkipList);
+
 function lastSearchOnLoad(lastsearch) {
   updateCityStatsCityName(lastsearch);
   getCities(lastsearch);
