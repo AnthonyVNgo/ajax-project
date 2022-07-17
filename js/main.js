@@ -79,7 +79,7 @@ function homeView() {
 }
 
 function backToSearchButtonClick(event) {
-  if (event.target.className === 'search-btn') {
+  if (event.target.className === 'search-btn' || event.target.className === 'desktop-search-btn') {
     homeView();
   }
 }
