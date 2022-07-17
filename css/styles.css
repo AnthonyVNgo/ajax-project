@@ -432,9 +432,25 @@ div.stats-column:nth-child(1) {
     cursor: pointer;
   }
 
+  .fav-skip-container > button:active {
+    margin: 0 0.75rem;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    background-color: #87ffd7cc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    cursor: pointer;
+  }
+
   .back-to-search-container {
     display: flex;
     justify-content: center;
+  }
+
+  .fa-solid .faxmark {
+    color: black;
   }
 }
 
