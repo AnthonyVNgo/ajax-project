@@ -50,7 +50,7 @@
 ::placeholder {
   color: #6c757d;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .search-bar-icon-container {
@@ -407,6 +407,7 @@ div.stats-column:nth-child(1) {
   }
 
   .back-to-search-container > button {
+    color: black;
     margin: 1.5rem 0 0;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
