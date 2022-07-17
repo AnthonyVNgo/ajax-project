@@ -270,7 +270,7 @@ ul::-webkit-scrollbar {
 /* Mobile UI stuff */
 
 .mobile-nav-container {
-  background-color: #e3f2fd;
+  background-color: #292929;
   height: 100px;
 }
 
@@ -289,10 +289,22 @@ ul::-webkit-scrollbar {
   text-align: center;
 }
 
+.row > .fa-magnifying-glass {
+  color: white;
+}
+
 .fa-regular {
   font-size: 2rem;
   display: inline;
   text-align: center;
+  color: white;
+}
+
+.row > .fa-solid {
+  font-size: 2rem;
+  display: inline;
+  text-align: center;
+  color: white;
 }
 
 .nav-item {
