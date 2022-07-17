@@ -154,11 +154,11 @@ function favSkipButtonClicked(event) {
 favSkipContainer.addEventListener('click', favSkipButtonClicked);
 
 function mobileFavSkipButtonClicked(event) {
-  if (event.target.className === 'skip-btn' || event.target.className === 'fa-regular fa-face-frown') {
+  if (event.target.className === 'skip-btn' || event.target.className === 'fa-solid fa-xmark') {
     addToSkip();
     notificationPopUp();
     populateNotification('Skip');
-  } else if (event.target.className === 'fav-btn' || event.target.className === 'fa-regular fa-face-smile-beam') {
+  } else if (event.target.className === 'fav-btn' || event.target.className === 'fa-solid fa-heart') {
     addToFavorite();
     notificationPopUp();
     populateNotification('Favorite');

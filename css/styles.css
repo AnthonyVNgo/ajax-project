@@ -291,6 +291,7 @@ ul::-webkit-scrollbar {
 
 .row > .fa-magnifying-glass {
   color: white;
+  margin-top: 5px;
 }
 
 .fa-regular {
@@ -301,7 +302,7 @@ ul::-webkit-scrollbar {
 }
 
 .row > .fa-solid {
-  font-size: 2rem;
+  font-size: 1.75rem;
   display: inline;
   text-align: center;
   color: white;
@@ -309,6 +310,17 @@ ul::-webkit-scrollbar {
 
 .nav-item {
   flex-basis: 10%;
+}
+
+div.row > i {
+  padding: 5px;
+}
+
+.skip-btn,
+.fav-btn,
+.search-btn {
+  color: white;
+  margin-top: 5px;
 }
 
 /* Responsive Stuff */
