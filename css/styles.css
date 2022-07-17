@@ -64,6 +64,7 @@
   border: none;
   margin-top: 2px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 button > i.fa-magnifying-glass {
@@ -224,6 +225,7 @@ div.justify-content-center > button {
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 /* summary button styling end */
@@ -277,6 +279,7 @@ ul::-webkit-scrollbar {
   border-radius: 10px;
   padding: 0.5rem 1.5rem;
   color: #292929;
+  cursor: pointer;
 }
 
 .fa-solid,
@@ -369,28 +372,43 @@ div.stats-column:nth-child(1) {
     margin: 0 0.75rem;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
-
-    /* font-weight: bold; */
     background-color: #93e4a5;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     width: 100px;
-  }
-
-  .back-to-search-container {
-    display: flex;
-    justify-content: center;
+    cursor: pointer;
+    transition-duration: 225ms;
   }
 
   .back-to-search-container > button {
     margin: 1.5rem 0 0;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
-
-    /* font-weight: bold; */
     border: none;
     background-color: transparent;
+    text-decoration: underline;
+    text-decoration-color: #93e4a5;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.5rem;
+    cursor: pointer;
+  }
+
+  .fav-skip-container > button:hover {
+    margin: 0 0.75rem;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    background-color: #a9ffbcb9;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    cursor: pointer;
+  }
+
+  .back-to-search-container {
+    display: flex;
+    justify-content: center;
   }
 }
 
