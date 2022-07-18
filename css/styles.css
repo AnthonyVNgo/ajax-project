@@ -33,7 +33,7 @@
   cursor: pointer;
 }
 
-button > i.fa-magnifying-glass {
+i.search-magnifying {
   font-size: 1rem;
 }
 
@@ -239,6 +239,14 @@ ul::-webkit-scrollbar {
 
 /* Mobile UI stuff */
 
+.mobile-btn-container {
+  height: 65%;
+}
+
+.mobile-list-container {
+  height: 35%;
+}
+
 .mobile-nav-container > .column-full > div > button {
   color: white;
   background-color: transparent;
@@ -250,18 +258,10 @@ ul::-webkit-scrollbar {
   background-color: rgb(49, 49, 49);
 }
 
-/* .mobile-list-container {
-  padding: 1rem 0;
-} */
-
 .mobile-nav-container {
   background-color: #292929;
   border-radius: 2.5px 2.5px 0 0;
-
-  /* height: 150px; */
   height: 115px;
-
-  /* height: 125px; */
 }
 
 .button {
@@ -274,7 +274,7 @@ ul::-webkit-scrollbar {
 
 .fa-solid,
 .fa-magnifying-glass {
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: inline;
   text-align: center;
 }
