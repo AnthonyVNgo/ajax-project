@@ -1,37 +1,3 @@
-/* Background stuff */
-
-#clouds-container {
-  width: 100vw;
-}
-
-#clouds {
-  position: absolute;
-  top: 5rem;
-  width: 100%;
-  height: auto;
-  z-index: -1;
-}
-
-#sun {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: -2;
-}
-
-.hills-desktop {
-  bottom: 0;
-  position: absolute;
-  margin: 0 0 -5px;
-  padding: 0;
-  z-index: -5;
-}
-
-.hills-desktop > svg {
-  width: 100vw;
-  height: 100px;
-}
-
 /* Homepage stuff */
 
 #home-view {
@@ -245,6 +211,10 @@ ul::-webkit-scrollbar {
 
 /* modal stuff */
 
+.fa-solid .fa-xmark .modal-xmark {
+  color: black;
+}
+
 .modal-container {
   display: flex;
   justify-content: center;
@@ -268,6 +238,22 @@ ul::-webkit-scrollbar {
 }
 
 /* Mobile UI stuff */
+
+.mobile-skipped-btn {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+
+.mobile-favorited-btn {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+
+.mobile-list-container {
+  padding: 1rem 0;
+}
 
 .mobile-nav-container {
   background-color: #292929;
@@ -301,12 +287,12 @@ ul::-webkit-scrollbar {
   color: white;
 }
 
-.row > .fa-solid {
+/* .row > .fa-solid {
   font-size: 1.75rem;
   display: inline;
   text-align: center;
   color: white;
-}
+} */
 
 .nav-item {
   flex-basis: 10%;
@@ -452,6 +438,40 @@ div.stats-column:nth-child(1) {
   .fa-solid .faxmark {
     color: black;
   }
+}
+
+/* Background stuff */
+
+#clouds-container {
+  width: 100vw;
+}
+
+#clouds {
+  position: absolute;
+  top: 5rem;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+}
+
+#sun {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -2;
+}
+
+.hills-desktop {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 -5px;
+  padding: 0;
+  z-index: -5;
+}
+
+.hills-desktop > svg {
+  width: 100vw;
+  height: 100px;
 }
 
 /* responsive clouds */

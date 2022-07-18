@@ -4,7 +4,6 @@
 
 .container {
   margin: 0 auto;
-  position: relative;
 }
 
 .row {
@@ -37,6 +36,10 @@
 
 .column-75 {
   flex-basis: 75%;
+}
+
+.column-50 {
+  flex-basis: 50%;
 }
 
 .column-thirds {

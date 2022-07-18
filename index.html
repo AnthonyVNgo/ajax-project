@@ -25,7 +25,7 @@
       </div>
     </header>
     <main>
-      <div class="container">
+      <div class="container position-relative">
         <!-- Home Page -->
         <div class="row justify-content-center align-content-center height-100vh-modded position-relative">
           <div id="home-view" class="column-75 height-fit-content">
@@ -42,6 +42,8 @@
                 </div>
               </div>
             </form>
+            <!-- <button class="desktop-skipped-btn">Skipped</button>
+            <button class="desktop-favorited-btn">Favorited</button> -->
             <!-- Search Bar on Home Page -->
           </div>
           <!-- Home Page -->
@@ -67,7 +69,9 @@
               <button class="fav-btn">Favorite</button>
             </div>
             <div class="back-to-search-container">
+              <button class="desktop-skipped-btn">Skipped</button>
               <button class="desktop-search-btn">Back To Search</button>
+              <button class="desktop-favorited-btn">Favorited</button>
             </div>
             <div class="notification-container hidden">
               <p></p>
@@ -115,34 +119,51 @@
           <div class="modal">
             <p></p>
             <div class="row justify-content-center">
-              <i class="fa-solid fa-xmark"></i>
+              <i class="fa-solid fa-xmark modal-xmark"></i>
             </div>
           </div>
         </div>
       </div>
 
       <!--  Mobile Nav Section -->
-      <div class="row mobile-nav-container justify-content-space-around align-content-center">
-        <div class="nav-item skip-btn">
-          <div class="row justify-content-center">
-            <!-- <i class="fa-regular fa-face-frown"></i> -->
-            <i class="fa-solid fa-xmark"></i>
+      <div class="row mobile-nav-container">
+        <div class="column-full">
+          <div class="row">
+            <button class="column-50">skipped</button>
+            <button class="column-50">Favorited</button>
           </div>
-          <p class="skip-btn">Skip</p>
+          <div class="row"></div>
         </div>
-        <div id="search-btn" class="nav-item">
-          <div class="row justify-content-center">
-            <i class="fa-solid fa-magnifying-glass"></i>
+
+
+
+        <!-- <div class="row mobile-nav-container justify-content-space-around align-content-center"></div> -->
+        <!-- <div class="column-full">
+          <div class="row justify-content-space-around align-content-center mobile-list-container">
+            <button class="mobile-skipped-btn">View Skipped</button>
+            <button class="mobile-favorited-btn">View Favorited</button>
           </div>
-          <p class="search-btn">Search</p>
-        </div>
-        <div class="nav-item fav-btn">
-          <div class="row justify-content-center">
-            <!-- <i class="fa-regular fa-face-smile-beam"></i> -->
-            <i class="fa-solid fa-heart"></i>
+          <div class="row justify-content-space-around align-content-center">
+            <div class="nav-item skip-btn">
+              <div class="row justify-content-center">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+              <p class="skip-btn">Skip</p>
+            </div>
+            <div id="search-btn" class="nav-item">
+              <div class="row justify-content-center">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <p class="search-btn">Search</p>
+            </div>
+            <div class="nav-item fav-btn">
+              <div class="row justify-content-center">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <p class="fav-btn">Favorite</p>
+            </div>
           </div>
-          <p class="fav-btn">Favorite</p>
-        </div>
+        </div> -->
       </div>
     </main>
     <script src="js/data.js"></script>
