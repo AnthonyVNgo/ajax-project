@@ -237,14 +237,14 @@ ul::-webkit-scrollbar {
   padding: 1rem;
 }
 
-/* Mobile UI stuff */
+/* Mobile UI start */
 
 .mobile-btn-container {
-  height: 65%;
+  height: 60%;
 }
 
 .mobile-list-container {
-  height: 35%;
+  height: 40%;
 }
 
 .mobile-nav-container > .column-full > div > button {
@@ -260,9 +260,10 @@ ul::-webkit-scrollbar {
 
 .mobile-nav-container {
   background-color: #292929;
-  border-radius: 2.5px 2.5px 0 0;
   height: 115px;
 }
+
+/* Mobile UI end */
 
 .button {
   background-color: #93e4a5;
@@ -272,16 +273,10 @@ ul::-webkit-scrollbar {
   cursor: pointer;
 }
 
-.fa-solid,
-.fa-magnifying-glass {
+.fa-solid {
   font-size: 1.5rem;
   display: inline;
   text-align: center;
-}
-
-.row > .fa-magnifying-glass {
-  color: white;
-  margin-top: 5px;
 }
 
 .fa-regular {
@@ -289,28 +284,6 @@ ul::-webkit-scrollbar {
   display: inline;
   text-align: center;
   color: white;
-}
-
-/* .row > .fa-solid {
-  font-size: 1.75rem;
-  display: inline;
-  text-align: center;
-  color: white;
-} */
-
-.nav-item {
-  flex-basis: 10%;
-}
-
-div.row > i {
-  padding: 5px;
-}
-
-.skip-btn,
-.fav-btn,
-.search-btn {
-  color: white;
-  margin-top: 5px;
 }
 
 /* Responsive Stuff */
