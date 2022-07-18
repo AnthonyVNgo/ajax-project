@@ -239,7 +239,13 @@ ul::-webkit-scrollbar {
 
 /* Mobile UI stuff */
 
-.mobile-skipped-btn {
+/* .mobile-list-container > button {
+  color: white;
+  background-color: transparent;
+  border: none;
+} */
+
+/* .mobile-skipped-btn {
   color: white;
   background-color: transparent;
   border: none;
@@ -249,7 +255,7 @@ ul::-webkit-scrollbar {
   color: white;
   background-color: transparent;
   border: none;
-}
+} */
 
 .mobile-list-container {
   padding: 1rem 0;
@@ -257,7 +263,7 @@ ul::-webkit-scrollbar {
 
 .mobile-nav-container {
   background-color: #292929;
-  height: 100px;
+  height: 150px;
 }
 
 .button {
