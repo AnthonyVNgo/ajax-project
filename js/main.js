@@ -16,27 +16,74 @@ var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
 var containerElement = document.querySelector('.container');
 
-function removeFromDataList(cityName) {
+// view swapping start
+function hideCityStatsView() {
+  cityStatsViewContainer.className = 'hidden';
+}
+
+function hideHomeView() {
+  homeViewContainer.className = 'hidden';
+}
+
+function hideFavAndSkipListView() {
+  favAndSkipView.className = 'hidden';
+}
+
+function showFavAndSkipListView() {
+  favAndSkipView.className = 'column-full height-fit-content';
+}
+
+function showCityStatsView() {
+  cityStatsViewContainer.className = 'column-full height-fit-content';
+  data.pageview = 'stats';
+}
+
+function removeStatsList() {
+  while (cityStatsCityStatsList.childElementCount > 0) {
+    cityStatsCityStatsList.firstChild.remove();
+  }
+}
+
+function showHomeView() {
+  homeViewContainer.className = 'column-full height-fit-content';
+  removeStatsList();
+  data.pageview = 'home';
+}
+
+function createFavSkipListItem(name, score) {
+  var liElement = document.createElement('li');
+  var liContainer = document.createElement('div');
+  var liStatsElement = document.createElement('p');
+  var liScoreElement = document.createElement('p');
+
+  liContainer.className = 'row justify-content-space-between';
+  liStatsElement.textContent = name;
+  liScoreElement.textContent = score;
+
+  liElement.appendChild(liContainer);
+  liContainer.appendChild(liStatsElement);
+  liContainer.appendChild(liScoreElement);
+  favAndSkipUlElement.appendChild(liElement);
+}
+
+function checkCityBooleanProperty(booleanValue) {
   for (var i = 0; i < data.list.length; i++) {
-    if (cityName === data.list[i].name) {
-      data.list.splice(i, 1);
+    if (data.list[i].boolean === booleanValue) {
+      createFavSkipListItem(data.list[i].name, data.list[i].overallScore);
     }
   }
 }
 
-function removeFromFavSkipList(event) {
-  if (event.target.tagName === 'DIV') {
-    removeFromDataList(event.target.querySelector('p').textContent);
-    favAndSkipUlElement.removeChild(event.target.parentNode);
-  }
+function homeView() {
+  showHomeView();
+  hideCityStatsView();
+  hideFavAndSkipListView();
 }
 
-favAndSkipUlElement.addEventListener('click', removeFromFavSkipList);
-
-function lastSearchOnLoad(lastsearch) {
-  updateCityStatsCityName(lastsearch);
-  getCities(lastsearch);
-  cityStatsView();
+function cityStatsView() {
+  hideHomeView();
+  showCityStatsView();
+  overAllScore();
 }
 
 function favoriteView() {
@@ -55,6 +102,12 @@ function skipView() {
   document.querySelector('#list-title').textContent = 'Skip';
 }
 
+function lastSearchOnLoad(lastsearch) {
+  updateCityStatsCityName(lastsearch);
+  getCities(lastsearch);
+  cityStatsView();
+}
+
 function pageLoadViews() {
   if (data.pageview === 'home') {
     homeView();
@@ -71,12 +124,6 @@ function contentLoaded(event) {
   pageLoadViews();
 }
 document.addEventListener('DOMContentLoaded', contentLoaded);
-
-function homeView() {
-  showHomeView();
-  hideCityStatsView();
-  hideFavAndSkipListView();
-}
 
 function backToSearchButtonClick(event) {
   if (event.target.className === 'mobile-search-btn' || event.target.className === 'desktop-search-btn') {
@@ -119,13 +166,9 @@ function favoriteAndSkipListView(event) {
 
 containerElement.addEventListener('click', favoriteAndSkipListView);
 
-function showFavAndSkipListView() {
-  favAndSkipView.className = 'column-full height-fit-content';
-}
+// view swapping end
 
-function hideFavAndSkipListView() {
-  favAndSkipView.className = 'hidden';
-}
+// notification start
 
 function notificationPopUp() {
   notificationContainer.className = 'notification-container';
@@ -215,29 +258,22 @@ function addToSkip() {
   }
 }
 
-function createFavSkipListItem(name, score) {
-  var liElement = document.createElement('li');
-  var liContainer = document.createElement('div');
-  var liStatsElement = document.createElement('p');
-  var liScoreElement = document.createElement('p');
-
-  liContainer.className = 'row justify-content-space-between';
-  liStatsElement.textContent = name;
-  liScoreElement.textContent = score;
-
-  liElement.appendChild(liContainer);
-  liContainer.appendChild(liStatsElement);
-  liContainer.appendChild(liScoreElement);
-  favAndSkipUlElement.appendChild(liElement);
-}
-
-function checkCityBooleanProperty(booleanValue) {
+function removeFromDataList(cityName) {
   for (var i = 0; i < data.list.length; i++) {
-    if (data.list[i].boolean === booleanValue) {
-      createFavSkipListItem(data.list[i].name, data.list[i].overallScore);
+    if (cityName === data.list[i].name) {
+      data.list.splice(i, 1);
     }
   }
 }
+
+function removeFromFavSkipList(event) {
+  if (event.target.tagName === 'DIV') {
+    removeFromDataList(event.target.querySelector('p').textContent);
+    favAndSkipUlElement.removeChild(event.target.parentNode);
+  }
+}
+
+favAndSkipUlElement.addEventListener('click', removeFromFavSkipList);
 
 function showModal() {
   modalContainer.className = 'modal-container';
@@ -258,31 +294,6 @@ function exitCitySummaryMobile(event) {
 }
 
 xIcon.addEventListener('click', exitCitySummaryMobile);
-
-function hideHomeView() {
-  homeViewContainer.className = 'hidden';
-}
-
-function removeStatsList() {
-  while (cityStatsCityStatsList.childElementCount > 0) {
-    cityStatsCityStatsList.firstChild.remove();
-  }
-}
-
-function showHomeView() {
-  homeViewContainer.className = 'column-full height-fit-content';
-  removeStatsList();
-  data.pageview = 'home';
-}
-
-function showCityStatsView() {
-  cityStatsViewContainer.className = 'column-full height-fit-content';
-  data.pageview = 'stats';
-}
-
-function hideCityStatsView() {
-  cityStatsViewContainer.className = 'hidden';
-}
 
 function createListItem(score) {
   var liElement = document.createElement('li');
@@ -333,12 +344,6 @@ function populateSummaryDesktop(xhrResponseSummaryProperty) {
   var summaryDesktopContainer = document.querySelectorAll('.stats-column')[1];
   var summaryElement = summaryDesktopContainer.querySelector('p');
   summaryElement.innerHTML = xhrResponseSummaryProperty;
-}
-
-function cityStatsView() {
-  hideHomeView();
-  showCityStatsView();
-  overAllScore();
 }
 
 function homePageCitySearchSubmit(event) {
