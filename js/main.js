@@ -126,18 +126,16 @@ function contentLoaded(event) {
 document.addEventListener('DOMContentLoaded', contentLoaded);
 
 function backToSearchButtonClick(event) {
-  if (event.target.className === 'mobile-search-btn' || event.target.className === 'desktop-search-btn') {
+  if (event.target.className === 'column-thirds mobile-search-btn' || event.target.className === 'desktop-search-btn') {
     homeView();
   }
 }
-
-// containerElement.addEventListener('click', backToSearchButtonClick);
 document.addEventListener('click', backToSearchButtonClick);
 
 function favoriteAndSkipListView(event) {
   var listTitleElement = document.querySelector('#list-title');
 
-  if (event.target.className === 'desktop-favorited-btn') {
+  if (event.target.className === 'column-50 mobile-favorited-btn' || event.target.className === 'desktop-favorited-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
       data.pageview = 'favorite';
       favAndSkipUlElement.firstChild.remove();
@@ -149,7 +147,7 @@ function favoriteAndSkipListView(event) {
     hideHomeView();
     hideCityStatsView();
     checkCityBooleanProperty(true);
-  } else if (event.target.className === 'desktop-skipped-btn') {
+  } else if (event.target.className === 'column-50 mobile-skipped-btn' || event.target.className === 'desktop-skipped-btn') {
     data.pageview = 'skip';
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
@@ -201,12 +199,14 @@ favSkipContainer.addEventListener('click', favSkipButtonClicked);
 
 function mobileFavSkipButtonClicked(event) {
   // if (event.target.className === 'skip-btn' || event.target.className === 'fa-solid fa-xmark') {
-  if (event.target.className === 'mobile-skip-btn') {
+  if (event.target.className === 'column-thirds mobile-skip-btn') {
+  // if (event.target.className === 'mobile-skip-btn') {
     addToSkip();
     notificationPopUp();
     populateNotification('Skip');
   // } else if (event.target.className === 'fav-btn' || event.target.className === 'fa-solid fa-heart') {
-  } else if (event.target.className === 'mobile-fav-btn') {
+  // } else if (event.target.className === 'mobile-fav-btn') {
+  } else if (event.target.className === 'column-thirds mobile-fav-btn') {
     addToFavorite();
     notificationPopUp();
     populateNotification('Favorite');
