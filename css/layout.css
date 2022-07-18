@@ -26,6 +26,10 @@
   align-items: center;
 }
 
+.align-content-space-around {
+  align-content: space-around;
+}
+
 .height-fit-content {
   height: fit-content;
 }
@@ -54,10 +58,14 @@
   position: absolute;
 }
 
-.position-absolute-bottom-0 {
+.bottom-0 {
   bottom: 0;
 }
 
 .height-100vh-modded {
   height: calc(100vh - 100px);
+}
+
+.width-100vw {
+  width: 100vw;
 }

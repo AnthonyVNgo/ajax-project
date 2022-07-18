@@ -239,31 +239,29 @@ ul::-webkit-scrollbar {
 
 /* Mobile UI stuff */
 
-/* .mobile-list-container > button {
+.mobile-nav-container > .column-full > div > button {
   color: white;
   background-color: transparent;
-  border: none;
-} */
-
-/* .mobile-skipped-btn {
-  color: white;
-  background-color: transparent;
-  border: none;
+  border: solid 1px rgb(54, 54, 54);
 }
 
-.mobile-favorited-btn {
+.mobile-nav-container > .column-full > div > button:active {
   color: white;
-  background-color: transparent;
-  border: none;
-} */
+  background-color: rgb(49, 49, 49);
+}
 
-.mobile-list-container {
+/* .mobile-list-container {
   padding: 1rem 0;
-}
+} */
 
 .mobile-nav-container {
   background-color: #292929;
-  height: 150px;
+  border-radius: 2.5px 2.5px 0 0;
+
+  /* height: 150px; */
+  height: 115px;
+
+  /* height: 125px; */
 }
 
 .button {
