@@ -1,6 +1,5 @@
-// var searchBarElement = document.querySelector('#search-bar');
+var searchBarElement = document.querySelector('#search-bar');
 var searchFormElement = document.querySelector('form');
-// var searchButtonElement = document.querySelector('#search-btn');
 var cityStatsCityNameElement = document.querySelector('#city-stats-view-city-name');
 var cityStatsCityStatsList = document.querySelector('#city-stats-view-city-stats');
 var cityStatsViewContainer = document.querySelector('#city-stats-view');
@@ -9,12 +8,9 @@ var overAllScoreElement = document.querySelector('.overall-score');
 var xIcon = document.querySelector('.fa-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container');
-var favSkipContainer = document.querySelector('.fav-skip-container');
 var notificationContainer = document.querySelector('.notification-container');
-var mobileFavSkipContainer = document.querySelector('.mobile-nav-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
-var containerElement = document.querySelector('.container');
 
 // view swapping start
 function hideCityStatsView() {
@@ -38,17 +34,31 @@ function showCityStatsView() {
   data.pageview = 'stats';
 }
 
+function showHomeView() {
+  homeViewContainer.className = 'column-full height-fit-content';
+  removeStatsList();
+  data.pageview = 'home';
+}
+
 function removeStatsList() {
   while (cityStatsCityStatsList.childElementCount > 0) {
     cityStatsCityStatsList.firstChild.remove();
   }
 }
 
-function showHomeView() {
-  homeViewContainer.className = 'column-full height-fit-content';
-  removeStatsList();
-  data.pageview = 'home';
-}
+// function emptyListResponse() {
+//   console.log('this list is empty');
+// }
+
+// function checkIfListIncludesFavOrSkippedObject(booleanValue) {
+//   let conditionalvalue;
+//   for (let i = 0; i < data.list.length; i++) {
+//     if (data.list[i].boolean === booleanValue) {
+//       conditionalvalue = true;
+//     } else conditionalvalue = false;
+//   }
+//   return conditionalvalue;
+// }
 
 function createFavSkipListItem(name, score) {
   var liElement = document.createElement('li');
@@ -86,20 +96,24 @@ function cityStatsView() {
   overAllScore();
 }
 
-function favoriteView() {
+function favoritedAndSkippedListView(booleanValue) {
   showFavAndSkipListView();
   hideHomeView();
   hideCityStatsView();
-  checkCityBooleanProperty(true);
-  document.querySelector('#list-title').textContent = 'Favorites';
-}
-
-function skipView() {
-  showFavAndSkipListView();
-  hideHomeView();
-  hideCityStatsView();
-  checkCityBooleanProperty(false);
-  document.querySelector('#list-title').textContent = 'Skip';
+  checkCityBooleanProperty(booleanValue);
+  if (booleanValue === true) {
+    document.querySelector('#list-title').textContent = 'Favorites';
+    data.pageview = 'favorite';
+    if (cityStatsCityStatsList.childElementCount === 0) {
+      // emptyListResponse();
+    }
+  } else if (booleanValue === false) {
+    document.querySelector('#list-title').textContent = 'Skipped';
+    data.pageview = 'skip';
+    if (cityStatsCityStatsList.childElementCount === 0) {
+      // emptyListResponse();
+    }
+  }
 }
 
 function lastSearchOnLoad(lastsearch) {
@@ -114,9 +128,9 @@ function pageLoadViews() {
   } else if (data.pageview === 'stats') {
     lastSearchOnLoad(data.lastsearch);
   } else if (data.pageview === 'favorite') {
-    favoriteView();
+    favoritedAndSkippedListView(true);
   } else if (data.pageview === 'skip') {
-    skipView();
+    favoritedAndSkippedListView(false);
   }
 }
 
@@ -125,44 +139,30 @@ function contentLoaded(event) {
 }
 document.addEventListener('DOMContentLoaded', contentLoaded);
 
-function backToSearchButtonClick(event) {
-  if (event.target.className === 'column-thirds mobile-search-btn' || event.target.className === 'desktop-search-btn') {
+function searchButtonClick(event) {
+  if (event.target.className === 'column-thirds mobile-search-btn' || event.target.className === 'fa-solid fa-magnifying-glass' || event.target.className === 'desktop-search-btn') {
     homeView();
+    searchBarElement.focus();
   }
 }
-document.addEventListener('click', backToSearchButtonClick);
 
-function favoriteAndSkipListView(event) {
-  var listTitleElement = document.querySelector('#list-title');
+document.addEventListener('click', searchButtonClick);
 
+function favoritedAndSkippedBtnClick(event) {
   if (event.target.className === 'column-50 mobile-favorited-btn' || event.target.className === 'desktop-favorited-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
-      data.pageview = 'favorite';
       favAndSkipUlElement.firstChild.remove();
     }
-
-    data.pageview = 'favorite';
-    listTitleElement.textContent = 'Favorites';
-    showFavAndSkipListView();
-    hideHomeView();
-    hideCityStatsView();
-    checkCityBooleanProperty(true);
+    favoritedAndSkippedListView(true);
   } else if (event.target.className === 'column-50 mobile-skipped-btn' || event.target.className === 'desktop-skipped-btn') {
-    data.pageview = 'skip';
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
     }
-
-    data.pageview = 'skip';
-    listTitleElement.textContent = 'Skipped';
-    showFavAndSkipListView();
-    hideHomeView();
-    hideCityStatsView();
-    checkCityBooleanProperty(false);
+    favoritedAndSkippedListView(false);
   }
 }
 
-containerElement.addEventListener('click', favoriteAndSkipListView);
+document.addEventListener('click', favoritedAndSkippedBtnClick);
 
 // view swapping end
 
@@ -182,40 +182,38 @@ function populateNotification(favOrSkip) {
   notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
 }
 
-function favSkipButtonClicked(event) {
+// adding to favorites or skipped lists
+
+function addToFavorite() {
+  if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
+    addToList(true);
+  } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
+    updateCityBoolean(cityStatsCityNameElement.textContent, true);
+  }
+}
+
+function addToSkip() {
+  if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
+    addToList(false);
+  } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
+    updateCityBoolean(cityStatsCityNameElement.textContent, false);
+  }
+}
+
+function UniverwsalFavSkipButtonClicked(event) {
   var btnEventTarget = event.target.className;
-  if (btnEventTarget === 'fav-btn') {
-    addToFavorite();
-    notificationPopUp();
-    populateNotification('Favorite');
-  } else if (btnEventTarget === 'skip-btn') {
+  if (btnEventTarget === 'column-thirds mobile-skip-btn' || btnEventTarget === 'skip-btn' || btnEventTarget === 'fa-solid fa-xmark') {
     addToSkip();
     notificationPopUp();
     populateNotification('Skip');
-  }
-}
-
-favSkipContainer.addEventListener('click', favSkipButtonClicked);
-
-function mobileFavSkipButtonClicked(event) {
-  // if (event.target.className === 'skip-btn' || event.target.className === 'fa-solid fa-xmark') {
-  if (event.target.className === 'column-thirds mobile-skip-btn') {
-  // if (event.target.className === 'mobile-skip-btn') {
-    addToSkip();
-    notificationPopUp();
-    populateNotification('Skip');
-  // } else if (event.target.className === 'fav-btn' || event.target.className === 'fa-solid fa-heart') {
-  // } else if (event.target.className === 'mobile-fav-btn') {
-  } else if (event.target.className === 'column-thirds mobile-fav-btn') {
+  } else if (btnEventTarget === 'column-thirds mobile-fav-btn' || btnEventTarget === 'fav-btn' || btnEventTarget === 'fa-solid fa-heart') {
     addToFavorite();
     notificationPopUp();
     populateNotification('Favorite');
   }
 }
 
-mobileFavSkipContainer.addEventListener('click', mobileFavSkipButtonClicked);
-
-document.addEventListener('keydown', favoriteAndSkipListView);
+document.addEventListener('click', UniverwsalFavSkipButtonClicked);
 
 function checkIfListIncludes(input, value) {
   for (var i = 0; i < input.length; i++) {
@@ -239,22 +237,6 @@ function updateCityBoolean(textContent, booleanValue) {
     if (data.list[i].name === textContent) {
       data.list[i].boolean = booleanValue;
     }
-  }
-}
-
-function addToFavorite() {
-  if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
-    addToList(true);
-  } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
-    updateCityBoolean(cityStatsCityNameElement.textContent, true);
-  }
-}
-
-function addToSkip() {
-  if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === false) {
-    addToList(false);
-  } else if (checkIfListIncludes(data.list, cityStatsCityNameElement.textContent) === true) {
-    updateCityBoolean(cityStatsCityNameElement.textContent, false);
   }
 }
 
@@ -365,15 +347,6 @@ function homePageCitySearchSubmit(event) {
 
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
 
-// function searchButtonClick(event) {
-//   searchBarElement.focus();
-//   hideCityStatsView();
-//   showHomeView();
-//   hideFavAndSkipListView();
-// }
-
-// searchButtonElement.addEventListener('click', searchButtonClick);
-
 function getCities(city) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.teleport.org/api/urban_areas/slug%3A' + city + '/scores/');
@@ -387,5 +360,3 @@ function getCities(city) {
   });
   xhr.send();
 }
-
-// if response message === 404 or something, then return invalid request, try "los angeles"
