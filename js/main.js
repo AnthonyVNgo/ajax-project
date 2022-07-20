@@ -47,18 +47,18 @@ function removeStatsList() {
 }
 
 // function emptyListResponse() {
-//   console.log('this list is empty');
+//   // console.log('this list is empty');
 // }
 
-// function checkIfListIncludesFavOrSkippedObject(booleanValue) {
-//   let conditionalvalue;
-//   for (let i = 0; i < data.list.length; i++) {
-//     if (data.list[i].boolean === booleanValue) {
-//       conditionalvalue = true;
-//     } else conditionalvalue = false;
-//   }
-//   return conditionalvalue;
-// }
+function checkIfListIncludesFavOrSkippedObject(booleanValue) {
+  let conditionalvalue;
+  for (let i = 0; i < data.list.length; i++) {
+    if (data.list[i].boolean === booleanValue) {
+      conditionalvalue = true;
+    } else conditionalvalue = false;
+  }
+  return conditionalvalue;
+}
 
 function createFavSkipListItem(name, score) {
   var liElement = document.createElement('li');
@@ -104,14 +104,20 @@ function favoritedAndSkippedListView(booleanValue) {
   if (booleanValue === true) {
     document.querySelector('#list-title').textContent = 'Favorites';
     data.pageview = 'favorite';
-    if (cityStatsCityStatsList.childElementCount === 0) {
-      // emptyListResponse();
+    // if (cityStatsCityStatsList.childElementCount === 0) {
+    //   // emptyListResponse();
+    // }
+    if (checkIfListIncludesFavOrSkippedObject(true) === false) {
+      // console.log('list is empty');
     }
   } else if (booleanValue === false) {
     document.querySelector('#list-title').textContent = 'Skipped';
     data.pageview = 'skip';
-    if (cityStatsCityStatsList.childElementCount === 0) {
-      // emptyListResponse();
+    // if (cityStatsCityStatsList.childElementCount === 0) {
+    //   // emptyListResponse();
+    // }
+    if (checkIfListIncludesFavOrSkippedObject(false) === false) {
+      // console.log('list is empty');
     }
   }
 }
