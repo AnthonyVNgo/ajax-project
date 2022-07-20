@@ -11,6 +11,7 @@ var modalContainer = document.querySelector('.modal-container');
 var notificationContainer = document.querySelector('.notification-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
+// var emptyListMessage = document.querySelector('#empty-list-message');
 
 // view swapping start
 function hideCityStatsView() {
@@ -47,15 +48,25 @@ function removeStatsList() {
 }
 
 // function emptyListResponse() {
-//   // console.log('this list is empty');
+//   console.log('this list is empty');
+// }
+
+// if (cityStatsCityStatsList.childElementCount === 0) {
+//   emptyListMessage.className = '';
+// } else if (cityStatsCityStatsList.childElementCount !== 0) {
+//   emptyListMessage.className = 'hidden';
 // }
 
 function checkIfListIncludesFavOrSkippedObject(booleanValue) {
   let conditionalvalue;
   for (let i = 0; i < data.list.length; i++) {
     if (data.list[i].boolean === booleanValue) {
+      // console.log('list items available');
       conditionalvalue = true;
-    } else conditionalvalue = false;
+    } else {
+      // console.log('list items not-available');
+      conditionalvalue = false;
+    }
   }
   return conditionalvalue;
 }
@@ -101,24 +112,36 @@ function favoritedAndSkippedListView(booleanValue) {
   hideHomeView();
   hideCityStatsView();
   checkCityBooleanProperty(booleanValue);
+  // if (cityStatsCityStatsList.childElementCount === 0) {
+  //   emptyListMessage.className = '';
+  // } else if (cityStatsCityStatsList.childElementCount !== 0) {
+  //   emptyListMessage.className = 'hidden';
+  // }
+
   if (booleanValue === true) {
     document.querySelector('#list-title').textContent = 'Favorites';
     data.pageview = 'favorite';
+    if (checkIfListIncludesFavOrSkippedObject(true) === false) {
+      // console.log('this list is empty');
+    }
     // if (cityStatsCityStatsList.childElementCount === 0) {
     //   // emptyListResponse();
+    //   emptyListMessage.className = '';
+    // } else if (cityStatsCityStatsList.childElementCount !== 0) {
+    //   emptyListMessage.className = 'hidden';
     // }
-    if (checkIfListIncludesFavOrSkippedObject(true) === false) {
-      // console.log('list is empty');
-    }
   } else if (booleanValue === false) {
     document.querySelector('#list-title').textContent = 'Skipped';
     data.pageview = 'skip';
+    if (checkIfListIncludesFavOrSkippedObject(false) === false) {
+      // console.log('this list is empty');
+    }
     // if (cityStatsCityStatsList.childElementCount === 0) {
     //   // emptyListResponse();
+    //   emptyListMessage.className = '';
+    // } else if (cityStatsCityStatsList.childElementCount !== 0) {
+    //   emptyListMessage.className = 'hidden';
     // }
-    if (checkIfListIncludesFavOrSkippedObject(false) === false) {
-      // console.log('list is empty');
-    }
   }
 }
 
