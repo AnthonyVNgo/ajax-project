@@ -47,25 +47,21 @@ function removeStatsList() {
   }
 }
 
-// function emptyListResponse() {
-//   console.log('this list is empty');
-// }
-
-// if (cityStatsCityStatsList.childElementCount === 0) {
-//   emptyListMessage.className = '';
-// } else if (cityStatsCityStatsList.childElementCount !== 0) {
-//   emptyListMessage.className = 'hidden';
-// }
-
 function checkIfListIncludesFavOrSkippedObject(booleanValue) {
   let conditionalvalue;
-  for (let i = 0; i < data.list.length; i++) {
-    if (data.list[i].boolean === booleanValue) {
-      // console.log('list items available');
-      conditionalvalue = true;
-    } else {
-      // console.log('list items not-available');
-      conditionalvalue = false;
+  if (data.list[0] === undefined) {
+    // console.log('no list-items available');
+    conditionalvalue = false;
+    return conditionalvalue;
+  } else if (data.list[0] !== undefined) {
+    for (let i = 0; i < data.list.length; i++) {
+      if (data.list[i].boolean === booleanValue) {
+        // console.log('list items available');
+        conditionalvalue = true;
+      } else {
+        // console.log('list items not-available');
+        conditionalvalue = false;
+      }
     }
   }
   return conditionalvalue;
@@ -112,36 +108,12 @@ function favoritedAndSkippedListView(booleanValue) {
   hideHomeView();
   hideCityStatsView();
   checkCityBooleanProperty(booleanValue);
-  // if (cityStatsCityStatsList.childElementCount === 0) {
-  //   emptyListMessage.className = '';
-  // } else if (cityStatsCityStatsList.childElementCount !== 0) {
-  //   emptyListMessage.className = 'hidden';
-  // }
-
   if (booleanValue === true) {
     document.querySelector('#list-title').textContent = 'Favorites';
     data.pageview = 'favorite';
-    if (checkIfListIncludesFavOrSkippedObject(true) === false) {
-      // console.log('this list is empty');
-    }
-    // if (cityStatsCityStatsList.childElementCount === 0) {
-    //   // emptyListResponse();
-    //   emptyListMessage.className = '';
-    // } else if (cityStatsCityStatsList.childElementCount !== 0) {
-    //   emptyListMessage.className = 'hidden';
-    // }
   } else if (booleanValue === false) {
     document.querySelector('#list-title').textContent = 'Skipped';
     data.pageview = 'skip';
-    if (checkIfListIncludesFavOrSkippedObject(false) === false) {
-      // console.log('this list is empty');
-    }
-    // if (cityStatsCityStatsList.childElementCount === 0) {
-    //   // emptyListResponse();
-    //   emptyListMessage.className = '';
-    // } else if (cityStatsCityStatsList.childElementCount !== 0) {
-    //   emptyListMessage.className = 'hidden';
-    // }
   }
 }
 
@@ -183,11 +155,13 @@ function favoritedAndSkippedBtnClick(event) {
       favAndSkipUlElement.firstChild.remove();
     }
     favoritedAndSkippedListView(true);
+    checkIfListIncludesFavOrSkippedObject(true);
   } else if (event.target.className === 'column-50 mobile-skipped-btn' || event.target.className === 'desktop-skipped-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
     }
     favoritedAndSkippedListView(false);
+    checkIfListIncludesFavOrSkippedObject(false);
   }
 }
 
