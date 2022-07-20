@@ -8,6 +8,7 @@ var overAllScoreElement = document.querySelector('.overall-score');
 var xIcon = document.querySelector('.fa-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container');
+var modalContainerDiv = document.querySelector('.modal');
 var notificationContainer = document.querySelector('.notification-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
@@ -48,6 +49,7 @@ function removeStatsList() {
 }
 
 function checkIfListIncludesFavOrSkippedObject(booleanValue) {
+  // console.log('bang');
   let conditionalvalue;
   if (data.list[0] === undefined) {
     // console.log('no list-items available');
@@ -58,6 +60,7 @@ function checkIfListIncludesFavOrSkippedObject(booleanValue) {
       if (data.list[i].boolean === booleanValue) {
         // console.log('list items available');
         conditionalvalue = true;
+        return conditionalvalue;
       } else {
         // console.log('list items not-available');
         conditionalvalue = false;
@@ -155,13 +158,19 @@ function favoritedAndSkippedBtnClick(event) {
       favAndSkipUlElement.firstChild.remove();
     }
     favoritedAndSkippedListView(true);
-    checkIfListIncludesFavOrSkippedObject(true);
+    if (checkIfListIncludesFavOrSkippedObject(true) === false) {
+      // console.log('list items not-available');
+      emptyListModal(true);
+    }
   } else if (event.target.className === 'column-50 mobile-skipped-btn' || event.target.className === 'desktop-skipped-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
     }
     favoritedAndSkippedListView(false);
-    checkIfListIncludesFavOrSkippedObject(false);
+    if (checkIfListIncludesFavOrSkippedObject(false) === false) {
+      // console.log('list items not-available');
+      emptyListModal(false);
+    }
   }
 }
 
@@ -256,6 +265,7 @@ function removeFromFavSkipList(event) {
     removeFromDataList(event.target.querySelector('p').textContent);
     favAndSkipUlElement.removeChild(event.target.parentNode);
   }
+  // checkIfListIncludesFavOrSkippedObject(booleanValue)
 }
 
 favAndSkipUlElement.addEventListener('click', removeFromFavSkipList);
@@ -274,7 +284,29 @@ function summaryModal(event) {
 
 summaryButton.addEventListener('click', summaryModal);
 
+function populateEmptyListModal(booleanValue) {
+  let listTitle;
+  if (booleanValue === true) {
+    listTitle = 'Favorites';
+  } else {
+    listTitle = 'Skipped';
+  }
+
+  var summaryElement = modalContainerDiv.querySelector('p');
+  summaryElement.textContent = `${listTitle} list is empty. Try searching for a city and adding it to your ${listTitle} list`;
+}
+
+function emptyListModal() {
+  showModal();
+  populateEmptyListModal();
+}
+
 function exitCitySummaryMobile(event) {
+  if (data.pageview === 'favorite' || data.pageview === 'skip') {
+    homeView();
+    searchBarElement.focus();
+    hideModal();
+  }
   hideModal();
 }
 
@@ -320,9 +352,10 @@ function updateCityStatsCityName(cityNameFromInput) {
 }
 
 function populateSummaryMobile(xhrResponseSummaryProperty) {
-  var modalContainer = document.querySelector('.modal');
-  var summaryElement = modalContainer.querySelector('p');
+  // var modalContainerDiv = document.querySelector('.modal');
+  var summaryElement = modalContainerDiv.querySelector('p');
   summaryElement.innerHTML = xhrResponseSummaryProperty;
+  // summaryElement.textContent = xhrResponseSummaryProperty;
 }
 
 function populateSummaryDesktop(xhrResponseSummaryProperty) {
