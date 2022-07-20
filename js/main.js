@@ -159,7 +159,6 @@ function favoritedAndSkippedBtnClick(event) {
     }
     favoritedAndSkippedListView(true);
     if (checkIfListIncludesFavOrSkippedObject(true) === false) {
-      // console.log('list items not-available');
       emptyListModal(true);
     }
   } else if (event.target.className === 'column-50 mobile-skipped-btn' || event.target.className === 'desktop-skipped-btn') {
@@ -168,7 +167,6 @@ function favoritedAndSkippedBtnClick(event) {
     }
     favoritedAndSkippedListView(false);
     if (checkIfListIncludesFavOrSkippedObject(false) === false) {
-      // console.log('list items not-available');
       emptyListModal(false);
     }
   }
@@ -194,6 +192,8 @@ function populateNotification(favOrSkip) {
   notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
 }
 
+// notification end
+
 // adding to favorites or skipped lists
 
 function addToFavorite() {
@@ -213,6 +213,9 @@ function addToSkip() {
 }
 
 function UniverwsalFavSkipButtonClicked(event) {
+  if (data.pageview !== 'stats') {
+    return;
+  }
   var btnEventTarget = event.target.className;
   if (btnEventTarget === 'column-thirds mobile-skip-btn' || btnEventTarget === 'skip-btn' || btnEventTarget === 'fa-solid fa-xmark') {
     addToSkip();
@@ -270,6 +273,8 @@ function removeFromFavSkipList(event) {
 
 favAndSkipUlElement.addEventListener('click', removeFromFavSkipList);
 
+// summary and empty list modal start
+
 function showModal() {
   modalContainer.className = 'modal-container';
 }
@@ -296,12 +301,12 @@ function populateEmptyListModal(booleanValue) {
   summaryElement.textContent = `${listTitle} list is empty. Try searching for a city and adding it to your ${listTitle} list`;
 }
 
-function emptyListModal() {
+function emptyListModal(booleanValue) {
   showModal();
-  populateEmptyListModal();
+  populateEmptyListModal(booleanValue);
 }
 
-function exitCitySummaryMobile(event) {
+function exitModal(event) {
   if (data.pageview === 'favorite' || data.pageview === 'skip') {
     homeView();
     searchBarElement.focus();
@@ -310,7 +315,9 @@ function exitCitySummaryMobile(event) {
   hideModal();
 }
 
-xIcon.addEventListener('click', exitCitySummaryMobile);
+xIcon.addEventListener('click', exitModal);
+
+// summary and empty list modal end
 
 function createListItem(score) {
   var liElement = document.createElement('li');
@@ -352,10 +359,8 @@ function updateCityStatsCityName(cityNameFromInput) {
 }
 
 function populateSummaryMobile(xhrResponseSummaryProperty) {
-  // var modalContainerDiv = document.querySelector('.modal');
   var summaryElement = modalContainerDiv.querySelector('p');
   summaryElement.innerHTML = xhrResponseSummaryProperty;
-  // summaryElement.textContent = xhrResponseSummaryProperty;
 }
 
 function populateSummaryDesktop(xhrResponseSummaryProperty) {
