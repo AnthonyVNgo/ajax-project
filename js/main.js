@@ -264,11 +264,25 @@ function removeFromDataList(cityName) {
 }
 
 function removeFromFavSkipList(event) {
-  if (event.target.tagName === 'DIV') {
-    removeFromDataList(event.target.querySelector('p').textContent);
-    favAndSkipUlElement.removeChild(event.target.parentNode);
+  let booleanValue;
+  if (data.pageview === 'skip') {
+    booleanValue = false;
+  } else {
+    booleanValue = true;
   }
-  // checkIfListIncludesFavOrSkippedObject(booleanValue)
+
+  if (favAndSkipUlElement.childElementCount === 1) {
+    if (event.target.tagName === 'DIV') {
+      removeFromDataList(event.target.querySelector('p').textContent);
+      favAndSkipUlElement.removeChild(event.target.parentNode);
+      emptyListModal(booleanValue);
+    } else {
+      if (event.target.tagName === 'DIV') {
+        removeFromDataList(event.target.querySelector('p').textContent);
+        favAndSkipUlElement.removeChild(event.target.parentNode);
+      }
+    }
+  }
 }
 
 favAndSkipUlElement.addEventListener('click', removeFromFavSkipList);
