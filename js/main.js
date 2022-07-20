@@ -147,6 +147,7 @@ function searchButtonClick(event) {
   if (event.target.className === 'column-thirds mobile-search-btn' || event.target.className === 'fa-solid fa-magnifying-glass' || event.target.className === 'desktop-search-btn') {
     homeView();
     searchBarElement.focus();
+    hideModal();
   }
 }
 
@@ -319,6 +320,8 @@ function emptyListModal(booleanValue) {
   showModal();
   populateEmptyListModal(booleanValue);
 }
+
+// exitemptylistmodal too
 
 function exitModal(event) {
   if (data.pageview === 'favorite' || data.pageview === 'skip') {
