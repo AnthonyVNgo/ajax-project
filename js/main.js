@@ -153,6 +153,10 @@ function searchButtonClick(event) {
 document.addEventListener('click', searchButtonClick);
 
 function favoritedAndSkippedBtnClick(event) {
+  if (data.modalOpen) {
+    return;
+  }
+
   if (event.target.className === 'column-50 mobile-favorited-btn' || event.target.className === 'desktop-favorited-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
