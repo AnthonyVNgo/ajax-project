@@ -156,7 +156,7 @@ document.addEventListener('click', searchButtonClick);
 // can use a template literal to refactor code here for conditional value of desktop-favorited / skipped -btn
 
 function favoritedAndSkippedBtnClick(event) {
-  hideModal();
+  // hideModal();
   if (event.target.className === 'column-50 mobile-favorited-btn' || event.target.className === 'desktop-favorited-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
@@ -195,6 +195,10 @@ function populateNotification(favOrSkip) {
   var notificationTextElement = notificationContainer.querySelector('p');
   notificationTextElement.innerHTML = cityStatsCityNameElement.innerHTML + ' added to ' + favOrSkip + ' list';
 }
+function populateNotificationForInvalidSearch() {
+  var notificationTextElement = notificationContainer.querySelector('p');
+  notificationTextElement.innerHTML = 'Invalid search, try searching for cities like Los Angeles';
+}
 
 // notification end
 
@@ -224,11 +228,11 @@ function UniversalFavSkipButtonClicked(event) {
   if (btnEventTarget === 'column-thirds mobile-skip-btn' || btnEventTarget === 'skip-btn' || btnEventTarget === 'fa-solid fa-xmark') {
     addToSkip();
     notificationPopUp();
-    populateNotification('Skip');
+    populateNotification('Skipped');
   } else if (btnEventTarget === 'column-thirds mobile-fav-btn' || btnEventTarget === 'fav-btn' || btnEventTarget === 'fa-solid fa-heart') {
     addToFavorite();
     notificationPopUp();
-    populateNotification('Favorite');
+    populateNotification('Favorited');
   }
 }
 
@@ -409,7 +413,7 @@ function homePageCitySearchSubmit(event) {
 
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
-  cityStatsView();
+  // cityStatsView();
   data.lastsearch = inputValue;
   searchFormElement.reset();
 }
@@ -420,15 +424,33 @@ function getCities(city) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.teleport.org/api/urban_areas/slug%3A' + city + '/scores/');
   xhr.responseType = 'json';
+
   xhr.addEventListener('load', function () {
-    var cityStats = xhr.response.categories;
-    createList(cityStats);
-    var citySummary = xhr.response.summary;
-    populateSummaryMobile(citySummary);
-    populateSummaryDesktop(citySummary);
+    if (xhr.status !== 200) {
+      // console.log('bang');
+      showHomeView();
+      notificationPopUp();
+      populateNotificationForInvalidSearch();
+    } else {
+      var cityStats = xhr.response.categories;
+      createList(cityStats);
+      var citySummary = xhr.response.summary;
+      populateSummaryMobile(citySummary);
+      populateSummaryDesktop(citySummary);
+      cityStatsView();
+    }
+    // var cityStats = xhr.response.categories;
+    // createList(cityStats);
+    // var citySummary = xhr.response.summary;
+    // populateSummaryMobile(citySummary);
+    // populateSummaryDesktop(citySummary);
+    // // console.log(xhr.status);
   });
   xhr.send();
+
 }
 
 // if teleport api returns 404, then show modal + 'invalid search, try searching for cities like Los Angeles'
 // else continue with search results, populating modal, getting stats etc.
+
+// overlay for modal so can't click on any other buttons except for x icon
