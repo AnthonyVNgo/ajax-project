@@ -7,7 +7,7 @@ var homeViewContainer = document.querySelector('#home-view');
 var overAllScoreElement = document.querySelector('.overall-score');
 var xIcon = document.querySelector('.fa-xmark');
 var summaryButton = document.querySelector('#summary-button');
-var modalContainer = document.querySelector('.modal-container');
+var modalContainer = document.querySelector('.modal-container.hidden');
 var modalContainerDiv = document.querySelector('.modal');
 var notificationContainer = document.querySelector('.notification-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
@@ -153,7 +153,10 @@ function searchButtonClick(event) {
 
 document.addEventListener('click', searchButtonClick);
 
+// can use a template literal to refactor code here for conditional value of desktop-favorited / skipped -btn
+
 function favoritedAndSkippedBtnClick(event) {
+  hideModal();
   if (event.target.className === 'column-50 mobile-favorited-btn' || event.target.className === 'desktop-favorited-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
@@ -213,8 +216,8 @@ function addToSkip() {
   }
 }
 
-function UniverwsalFavSkipButtonClicked(event) {
-  if (data.pageview !== 'stats') {
+function UniversalFavSkipButtonClicked(event) {
+  if (data.pageview !== 'stats' || data.modalOpen === true) {
     return;
   }
   var btnEventTarget = event.target.className;
@@ -229,7 +232,7 @@ function UniverwsalFavSkipButtonClicked(event) {
   }
 }
 
-document.addEventListener('click', UniverwsalFavSkipButtonClicked);
+document.addEventListener('click', UniversalFavSkipButtonClicked);
 
 function checkIfListIncludes(input, value) {
   for (var i = 0; i < input.length; i++) {
@@ -264,6 +267,11 @@ function removeFromDataList(cityName) {
   }
 }
 
+function showModal() {
+  modalContainer.className = 'modal-container';
+  data.modalOpen = true;
+}
+
 function removeFromFavSkipList(event) {
   let booleanValue;
   if (data.pageview === 'skip') {
@@ -272,16 +280,22 @@ function removeFromFavSkipList(event) {
     booleanValue = true;
   }
 
+  if (favAndSkipUlElement.childElementCount !== 1) {
+    if (event.target.tagName === 'DIV') {
+      removeFromDataList(event.target.querySelector('p').textContent);
+      favAndSkipUlElement.removeChild(event.target.parentNode);
+    }
+  }
   if (favAndSkipUlElement.childElementCount === 1) {
     if (event.target.tagName === 'DIV') {
       removeFromDataList(event.target.querySelector('p').textContent);
       favAndSkipUlElement.removeChild(event.target.parentNode);
+      // can't figure out why this isn't firing
+      showModal();
+      // can't figure out why this isn't firing
+      // console.log('removeFromFavSkipList event fired');
+      // console.log('Element Count Reduced From 1 to 0');
       emptyListModal(booleanValue);
-    } else {
-      if (event.target.tagName === 'DIV') {
-        removeFromDataList(event.target.querySelector('p').textContent);
-        favAndSkipUlElement.removeChild(event.target.parentNode);
-      }
     }
   }
 }
@@ -290,12 +304,9 @@ favAndSkipUlElement.addEventListener('click', removeFromFavSkipList);
 
 // summary and empty list modal start
 
-function showModal() {
-  modalContainer.className = 'modal-container';
-}
-
 function hideModal() {
-  modalContainer.className = 'hidden';
+  modalContainer.className = 'modal-container hidden';
+  data.modalOpen = false;
 }
 
 function summaryModal(event) {
@@ -418,3 +429,6 @@ function getCities(city) {
   });
   xhr.send();
 }
+
+// if teleport api returns 404, then show modal + 'invalid search, try searching for cities like Los Angeles'
+// else continue with search results, populating modal, getting stats etc.
