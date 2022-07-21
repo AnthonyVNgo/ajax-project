@@ -103,7 +103,6 @@ function homeView() {
 function cityStatsView() {
   hideHomeView();
   showCityStatsView();
-  overAllScore();
 }
 
 function favoritedAndSkippedListView(booleanValue) {
@@ -153,10 +152,7 @@ function searchButtonClick(event) {
 
 document.addEventListener('click', searchButtonClick);
 
-// can use a template literal to refactor code here for conditional value of desktop-favorited / skipped -btn
-
 function favoritedAndSkippedBtnClick(event) {
-  // hideModal();
   if (event.target.className === 'column-50 mobile-favorited-btn' || event.target.className === 'desktop-favorited-btn') {
     while (favAndSkipUlElement.childElementCount > 0) {
       favAndSkipUlElement.firstChild.remove();
@@ -294,11 +290,7 @@ function removeFromFavSkipList(event) {
     if (event.target.tagName === 'DIV') {
       removeFromDataList(event.target.querySelector('p').textContent);
       favAndSkipUlElement.removeChild(event.target.parentNode);
-      // can't figure out why this isn't firing
       showModal();
-      // can't figure out why this isn't firing
-      // console.log('removeFromFavSkipList event fired');
-      // console.log('Element Count Reduced From 1 to 0');
       emptyListModal(booleanValue);
     }
   }
@@ -413,7 +405,6 @@ function homePageCitySearchSubmit(event) {
 
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
-  // cityStatsView();
   data.lastsearch = inputValue;
   searchFormElement.reset();
 }
@@ -427,7 +418,6 @@ function getCities(city) {
 
   xhr.addEventListener('load', function () {
     if (xhr.status !== 200) {
-      // console.log('bang');
       showHomeView();
       notificationPopUp();
       populateNotificationForInvalidSearch();
@@ -439,18 +429,9 @@ function getCities(city) {
       populateSummaryDesktop(citySummary);
       cityStatsView();
     }
-    // var cityStats = xhr.response.categories;
-    // createList(cityStats);
-    // var citySummary = xhr.response.summary;
-    // populateSummaryMobile(citySummary);
-    // populateSummaryDesktop(citySummary);
-    // // console.log(xhr.status);
   });
   xhr.send();
 
 }
-
-// if teleport api returns 404, then show modal + 'invalid search, try searching for cities like Los Angeles'
-// else continue with search results, populating modal, getting stats etc.
 
 // overlay for modal so can't click on any other buttons except for x icon
