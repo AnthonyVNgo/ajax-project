@@ -5,13 +5,15 @@ var cityStatsCityStatsList = document.querySelector('#city-stats-view-city-stats
 var cityStatsViewContainer = document.querySelector('#city-stats-view');
 var homeViewContainer = document.querySelector('#home-view');
 var overAllScoreElement = document.querySelector('.overall-score');
-var xIcon = document.querySelector('.fa-xmark');
+// var xIcon = document.querySelector('.fa-xmark');
+var xIcon = document.querySelector('.modal-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container.hidden');
 var modalContainerDiv = document.querySelector('.modal');
 var notificationContainer = document.querySelector('.notification-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
+// var emptyListMessage = document.querySelector('#empty-list-message');
 
 // view swapping start
 function hideCityStatsView() {
@@ -317,7 +319,7 @@ summaryButton.addEventListener('click', summaryModal);
 function populateEmptyListModal(booleanValue) {
   let listTitle;
   if (booleanValue === true) {
-    listTitle = 'Favorited';
+    listTitle = 'Favorites';
   } else {
     listTitle = 'Skipped';
   }
@@ -434,4 +436,7 @@ function getCities(city) {
     }
   });
   xhr.send();
+
 }
+
+// overlay for modal so can't click on any other buttons except for x icon

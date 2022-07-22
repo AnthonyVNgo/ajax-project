@@ -168,6 +168,17 @@ ul#fav-and-skip-list {
   margin: 0 0 2rem;
 }
 
+ul#fav-and-skip-list > li {
+  border: transparent;
+  transition-duration: 225ms;
+}
+
+ul#fav-and-skip-list > li:hover {
+  border: lightgreen solid 1px;
+  border-radius: 10px;
+  background-color: rgba(144, 238, 144, 0.286);
+}
+
 /* underline styling start */
 .overall-score::before {
   content: "";
@@ -326,7 +337,7 @@ div.stats-column:nth-child(1) {
   }
 
   div.height-100vh-modded > div {
-    flex-basis: 300px;
+    flex-basis: 365px;
   }
 
   #summary-button {
@@ -338,7 +349,7 @@ div.stats-column:nth-child(1) {
   }
 
   .saved-list-column {
-    flex-basis: 90%;
+    flex-basis: 80%;
   }
 
   .stats-column {
@@ -361,25 +372,33 @@ div.stats-column:nth-child(1) {
 
   .fav-skip-container > button {
     color: black;
-    margin: 0.75rem;
-    font-family: "DM Sans", sans-serif;
+    margin: 0 0.75rem;
     font-size: 1rem;
     background-color: #93e4a5;
-    padding: 15px;
+    height: 50px;
+    width: 50px;
     border: none;
-    border-radius: 42069px;
+    border-radius: 50%;
     cursor: pointer;
     transition-duration: 225ms;
   }
 
   .back-to-search-container > button {
     color: black;
-    font-family: "DM Sans", sans-serif;
     font-size: 1rem;
     border: solid 1px white;
     padding: 0.75rem 1.25rem;
     background-color: #93e4a5;
     cursor: pointer;
+    transition-duration: 225ms;
+  }
+
+  .back-to-search-container > button:hover {
+    background-color: #a9ffbcb9;
+  }
+
+  .back-to-search-container > button:active {
+    background-color: #87ffd7cc;
   }
 
   .fav-skip-container > button:hover {
