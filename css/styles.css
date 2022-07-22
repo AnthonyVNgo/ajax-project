@@ -361,14 +361,13 @@ div.stats-column:nth-child(1) {
 
   .fav-skip-container > button {
     color: black;
-    margin: 0 0.75rem;
+    margin: 0.75rem;
     font-family: "DM Sans", sans-serif;
     font-size: 1rem;
     background-color: #93e4a5;
-    padding: 10px 15px;
+    padding: 15px;
     border: none;
-    border-radius: 5px;
-    width: 100px;
+    border-radius: 42069px;
     cursor: pointer;
     transition-duration: 225ms;
   }
