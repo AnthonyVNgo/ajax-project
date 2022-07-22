@@ -12,7 +12,6 @@ var modalContainerDiv = document.querySelector('.modal');
 var notificationContainer = document.querySelector('.notification-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
-// var emptyListMessage = document.querySelector('#empty-list-message');
 
 // view swapping start
 function hideCityStatsView() {
@@ -318,7 +317,7 @@ summaryButton.addEventListener('click', summaryModal);
 function populateEmptyListModal(booleanValue) {
   let listTitle;
   if (booleanValue === true) {
-    listTitle = 'Favorites';
+    listTitle = 'Favorited';
   } else {
     listTitle = 'Skipped';
   }
@@ -435,7 +434,4 @@ function getCities(city) {
     }
   });
   xhr.send();
-
 }
-
-// overlay for modal so can't click on any other buttons except for x icon
