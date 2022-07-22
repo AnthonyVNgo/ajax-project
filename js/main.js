@@ -14,6 +14,7 @@ var notificationContainer = document.querySelector('.notification-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
 // var emptyListMessage = document.querySelector('#empty-list-message');
+var loadingModal = document.querySelector('#loading-modal');
 
 // view swapping start
 function hideCityStatsView() {
@@ -416,10 +417,27 @@ function homePageCitySearchSubmit(event) {
 
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
 
+function hideLoadingModal() {
+  // loadingModal.className = 'hidden';
+  // console.log('loaded');
+}
+
+function showLoadingModal() {
+  loadingModal.className = '';
+  // console.log('loading');
+}
+
 function getCities(city) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.teleport.org/api/urban_areas/slug%3A' + city + '/scores/');
   xhr.responseType = 'json';
+  xhr.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      hideLoadingModal();
+    } else {
+      showLoadingModal();
+    }
+  };
 
   xhr.addEventListener('load', function () {
     if (xhr.status !== 200) {
