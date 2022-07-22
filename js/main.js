@@ -5,7 +5,6 @@ var cityStatsCityStatsList = document.querySelector('#city-stats-view-city-stats
 var cityStatsViewContainer = document.querySelector('#city-stats-view');
 var homeViewContainer = document.querySelector('#home-view');
 var overAllScoreElement = document.querySelector('.overall-score');
-// var xIcon = document.querySelector('.fa-xmark');
 var xIcon = document.querySelector('.modal-xmark');
 var summaryButton = document.querySelector('#summary-button');
 var modalContainer = document.querySelector('.modal-container.hidden');
@@ -13,7 +12,6 @@ var modalContainerDiv = document.querySelector('.modal');
 var notificationContainer = document.querySelector('.notification-container');
 var favAndSkipView = document.querySelector('#fav-and-skip-list-view');
 var favAndSkipUlElement = document.querySelector('#fav-and-skip-list');
-// var emptyListMessage = document.querySelector('#empty-list-message');
 var loadingModal = document.querySelector('#loading-modal');
 
 // view swapping start
@@ -408,7 +406,6 @@ function homePageCitySearchSubmit(event) {
     var newInputValue = inputValue.replace(' ', '-');
     inputValue = newInputValue;
   }
-
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
   data.lastsearch = inputValue;
@@ -418,27 +415,18 @@ function homePageCitySearchSubmit(event) {
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
 
 function hideLoadingModal() {
-  // loadingModal.className = 'hidden';
-  // console.log('loaded');
+  loadingModal.className = 'hidden';
 }
 
 function showLoadingModal() {
   loadingModal.className = '';
-  // console.log('loading');
 }
 
 function getCities(city) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.teleport.org/api/urban_areas/slug%3A' + city + '/scores/');
   xhr.responseType = 'json';
-  xhr.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      hideLoadingModal();
-    } else {
-      showLoadingModal();
-    }
-  };
-
+  showLoadingModal();
   xhr.addEventListener('load', function () {
     if (xhr.status !== 200) {
       showHomeView();
@@ -451,10 +439,8 @@ function getCities(city) {
       populateSummaryMobile(citySummary);
       populateSummaryDesktop(citySummary);
       cityStatsView();
+      hideLoadingModal();
     }
   });
   xhr.send();
-
 }
-
-// overlay for modal so can't click on any other buttons except for x icon
