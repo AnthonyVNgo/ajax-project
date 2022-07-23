@@ -592,7 +592,3 @@ div.stats-column:nth-child(1) {
   left: 0;
   z-index: 10;
 }
-
-/*
-opacity: 0;
-  transition: opacity 2s ease-out; */

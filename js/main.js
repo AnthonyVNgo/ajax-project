@@ -49,20 +49,16 @@ function removeStatsList() {
 }
 
 function checkIfListIncludesFavOrSkippedObject(booleanValue) {
-  // console.log('bang');
   let conditionalvalue;
   if (data.list[0] === undefined) {
-    // console.log('no list-items available');
     conditionalvalue = false;
     return conditionalvalue;
   } else if (data.list[0] !== undefined) {
     for (let i = 0; i < data.list.length; i++) {
       if (data.list[i].boolean === booleanValue) {
-        // console.log('list items available');
         conditionalvalue = true;
         return conditionalvalue;
       } else {
-        // console.log('list items not-available');
         conditionalvalue = false;
       }
     }
