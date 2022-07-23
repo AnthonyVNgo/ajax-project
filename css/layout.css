@@ -4,7 +4,6 @@
 
 .container {
   margin: 0 auto;
-  position: relative;
 }
 
 .row {
@@ -27,6 +26,10 @@
   align-items: center;
 }
 
+.align-content-space-around {
+  align-content: space-around;
+}
+
 .height-fit-content {
   height: fit-content;
 }
@@ -37,6 +40,10 @@
 
 .column-75 {
   flex-basis: 75%;
+}
+
+.column-50 {
+  flex-basis: 50%;
 }
 
 .column-thirds {
@@ -51,10 +58,22 @@
   position: absolute;
 }
 
-.position-absolute-bottom-0 {
-  bottom: 0;
+.bottom-0 {
+  bottom: -1px;
 }
 
 .height-100vh-modded {
   height: calc(100vh - 100px);
+}
+
+.width-100vw {
+  width: 100vw;
+}
+
+.height-50 {
+  height: 50%;
+}
+
+.height-35 {
+  height: 35%;
 }
