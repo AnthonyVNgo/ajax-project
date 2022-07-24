@@ -328,8 +328,6 @@ function emptyListModal(booleanValue) {
   populateEmptyListModal(booleanValue);
 }
 
-// exitemptylistmodal too
-
 function exitModal(event) {
   if (data.pageview === 'favorite' || data.pageview === 'skip') {
     homeView();
@@ -348,12 +346,9 @@ function createListItem(score) {
   var liContainer = document.createElement('div');
   var liStatsElement = document.createElement('p');
   var liScoreElement = document.createElement('p');
-
   liContainer.className = 'row justify-content-space-between';
-
   liStatsElement.textContent = score.name;
   liScoreElement.textContent = Math.floor(score.score_out_of_10) + '/10';
-
   liElement.appendChild(liContainer);
   liContainer.appendChild(liStatsElement);
   liContainer.appendChild(liScoreElement);
@@ -363,7 +358,6 @@ function createListItem(score) {
 
 function createList(scores) {
   var sumAllScores = 0;
-
   for (var i = 0; i < scores.length; i++) {
     sumAllScores += createListItem(scores[i]);
   }
@@ -395,19 +389,16 @@ function populateSummaryDesktop(xhrResponseSummaryProperty) {
 
 function homePageCitySearchSubmit(event) {
   event.preventDefault();
-
   var inputValue = searchFormElement.querySelector('input').value;
-
   if (inputValue.search(' ') !== -1) {
     var newInputValue = inputValue.replace(' ', '-');
-    inputValue = newInputValue;
+    inputValue = newInputValue.toLocaleLowerCase();
   }
   updateCityStatsCityName(inputValue);
   getCities(inputValue);
   data.lastsearch = inputValue;
   searchFormElement.reset();
 }
-
 searchFormElement.addEventListener('submit', homePageCitySearchSubmit);
 
 function hideLoadingModal() {
@@ -424,6 +415,7 @@ function getCities(city) {
   xhr.responseType = 'json';
   showLoadingModal();
   xhr.addEventListener('load', function () {
+    hideLoadingModal();
     if (xhr.status !== 200) {
       showHomeView();
       notificationPopUp();
@@ -435,7 +427,6 @@ function getCities(city) {
       populateSummaryMobile(citySummary);
       populateSummaryDesktop(citySummary);
       cityStatsView();
-      hideLoadingModal();
     }
   });
   xhr.send();

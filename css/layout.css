@@ -18,17 +18,17 @@
   justify-content: space-between;
 }
 
-.justify-content-space-around {
+/* .justify-content-space-around {
   justify-content: space-around;
-}
+} */
 
 .align-content-center {
   align-items: center;
 }
 
-.align-content-space-around {
+/* .align-content-space-around {
   align-content: space-around;
-}
+} */
 
 .height-fit-content {
   height: fit-content;
@@ -74,6 +74,6 @@
   height: 50%;
 }
 
-.height-35 {
+/* .height-35 {
   height: 35%;
-}
+} */
