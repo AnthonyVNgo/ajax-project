@@ -39,13 +39,9 @@ i.search-magnifying {
 
 input {
   flex-basis: 100%;
-
-  /* padding: 10px 5px 10px 0; */
   padding: 0.625rem 1rem 0.625rem 3rem;
   border-radius: 5px;
   border: solid 2px #ced4da;
-
-  /* padding-left: 3rem; */
 }
 
 input:focus {
@@ -231,6 +227,7 @@ ul::-webkit-scrollbar {
   color: black;
 }
 
+/* Mobile Summary Modal Container and Overlay  */
 .modal-container {
   display: flex;
   justify-content: center;
