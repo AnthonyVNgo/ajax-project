@@ -26,7 +26,7 @@
 }
 
 .search-bar-icon-container > button {
-  padding: 10px;
+  padding: 0.625rem;
   border: none;
   margin-top: 2px;
   background-color: transparent;
@@ -39,10 +39,9 @@ i.search-magnifying {
 
 input {
   flex-basis: 100%;
-  padding: 10px 5px 10px 0;
+  padding: 0.625rem 1rem 0.625rem 3rem;
   border-radius: 5px;
   border: solid 2px #ced4da;
-  padding-left: 3rem;
 }
 
 input:focus {
@@ -53,7 +52,7 @@ input:focus {
 /* Statspage */
 
 li > div > p {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0.4rem 0;
   text-transform: capitalize;
@@ -64,7 +63,7 @@ li > div > p {
 }
 
 .stats-column > p {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
@@ -201,7 +200,7 @@ div.justify-content-center > button {
   font-size: 1rem;
   font-weight: bold;
   background-color: #93e4a5;
-  padding: 10px 15px;
+  padding: 0.625rem 0.938rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -228,6 +227,7 @@ ul::-webkit-scrollbar {
   color: black;
 }
 
+/* Mobile Summary Modal Container and Overlay  */
 .modal-container {
   display: flex;
   justify-content: center;
